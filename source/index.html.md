@@ -13,6 +13,7 @@ includes:
   - organizations
   - keysets
   - clusters
+  - nodepools
   - nodes
 
 search: true

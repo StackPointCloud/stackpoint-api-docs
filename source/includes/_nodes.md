@@ -86,7 +86,7 @@ This endpoint retrieves all transitioning or running nodes under a given cluster
 
 ### HTTP Request
 
-`GET https://api.stackpoint.io/orgs/<ORG_ID>/clusters?<CLUSTER_ID>/nodes`
+`GET https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<CLUSTER_ID>/nodes`
 
 ### URL Parameters
 
