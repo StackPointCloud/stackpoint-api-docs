@@ -1,116 +1,73 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/lord/img/master/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
-  <br>
-  <a href="https://travis-ci.org/lord/slate"><img src="https://travis-ci.org/lord/slate.svg?branch=master" alt="Build Status"></a>
-</p>
+# Stackpoint API Docs
 
-<p align="center">Slate helps you create beautiful, intelligent, responsive API documentation.</p>
+The compressed docs site currently reside in the UI repo, which is debatable. Ideally we would have docs.stackpoint.io or something like that.
 
-<p align="center"><img src="https://raw.githubusercontent.com/lord/img/master/screenshot-slate.png" width=700 alt="Screenshot of Example Documentation created with Slate"></p>
+The original Slate docs are [here](./slate.md).
 
-<p align="center"><em>The example above was created with Slate. Check it out at <a href="https://lord.github.io/slate">lord.github.io/slate</a>.</em></p>
+## Setup
 
-Features
-------------
+First, check out this repo.
 
-* **Clean, intuitive design** — With Slate, the description of your API is on the left side of your documentation, and all the code examples are on the right side. Inspired by [Stripe's](https://stripe.com/docs/api) and [PayPal's](https://developer.paypal.com/webapps/developer/docs/api/) API docs. Slate is responsive, so it looks great on tablets, phones, and even in print.
+If you're setting up natively on Mac, you're in luck. Run the following commands:
 
-* **Everything on a single page** — Gone are the days when your users had to search through a million pages to find what they wanted. Slate puts the entire documentation on a single page. We haven't sacrificed linkability, though. As you scroll, your browser's hash will update to the nearest header, so linking to a particular point in the documentation is still natural and easy.
+    brew install rbenv
+    rbenv init
 
-* **Slate is just Markdown** — When you write docs with Slate, you're just writing Markdown, which makes it simple to edit and understand. Everything is written in Markdown — even the code samples are just Markdown code blocks.
+You might want to add this to your bash profile:
 
-* **Write code samples in multiple languages** — If your API has bindings in multiple programming languages, you can easily put in tabs to switch between them. In your document, you'll distinguish different languages by specifying the language name at the top of each code block, just like with GitHub Flavored Markdown.
+    eval "$(rbenv init -)"
 
-* **Out-of-the-box syntax highlighting** for [over 100 languages](https://github.com/jneen/rouge/wiki/List-of-supported-languages-and-lexers), no configuration required.
+Install latest ruby:
 
-* **Automatic, smoothly scrolling table of contents** on the far left of the page. As you scroll, it displays your current position in the document. It's fast, too. We're using Slate at TripIt to build documentation for our new API, where our table of contents has over 180 entries. We've made sure that the performance remains excellent, even for larger documents.
+    rbenv install 2.4.2
 
-* **Let your users update your documentation for you** — By default, your Slate-generated documentation is hosted in a public GitHub repository. Not only does this mean you get free hosting for your docs with GitHub Pages, but it also makes it simple for other developers to make pull requests to your docs if they find typos or other problems. Of course, if you don't want to use ], you're also welcome to host your docs elsewhere.
+Allow all apps to use this version:
 
-* **RTL Support** Full right-to-left layout for RTL languages such as Arabic, Persian (Farsi), Hebrew etc.
+    rbenv global 2.4.2
 
-Getting started with Slate is super easy! Simply fork this repository and follow the instructions below. Or, if you'd like to check out what Slate is capable of, take a look at the [sample docs](http://lord.github.io/slate).
+Install bundler:
 
-Getting Started with Slate
-------------------------------
+    gem install bundler
 
-### Prerequisites
+Now we're ready to get the doc site requirements. Switch to the project directory:
 
-You're going to need:
+    bundle install
+    bundle exec middleman server
 
- - **Linux or OS X** — Windows may work, but is unsupported.
- - **Ruby, version 2.3.1 or newer**
- - **Bundler** — If Ruby is already installed, but the `bundle` command doesn't work, just run `gem install bundler` in a terminal.
+Access the doc site at:
 
-### Getting Set Up
+    http://localhost:4567
 
-1. Fork this repository on GitHub.
-2. Clone *your forked repository* (not our original one) to your hard drive with `git clone https://github.com/YOURUSERNAME/slate.git`
-3. `cd slate`
-4. Initialize and start Slate. You can either do this locally, or with Vagrant:
+## Editing Basics
 
-```shell
-# either run this to run locally
-bundle install
-bundle exec middleman server
+Each high level API resource should have it's own file under:
 
-# OR run this to run with vagrant
-vagrant up
-```
+    source/includes/_<resource_name>.md
 
-You can now see the docs at http://localhost:4567. Whoa! That was fast!
+Then insert `_<resource_name>.md` in the includes list in `index.html.md`.
 
-Now that Slate is all set up on your machine, you'll probably want to learn more about [editing Slate markdown](https://github.com/lord/slate/wiki/Markdown-Syntax), or [how to publish your docs](https://github.com/lord/slate/wiki/Deploying-Slate).
+Changes appear on the local doc site on refresh.
 
-If you'd prefer to use Docker, instructions are available [in the wiki](https://github.com/lord/slate/wiki/Docker).
+Push to master when done, no PR necessary.
 
-### Note on JavaScript Runtime
+## Deploying Docs to quarter-master-frontend
 
-For those who don't have JavaScript runtime or are experiencing JavaScript runtime issues with ExecJS, it is recommended to add the [rubyracer gem](https://github.com/cowboyd/therubyracer) to your gemfile and run `bundle` again.
+### Pre-requisite
 
-Companies Using Slate
----------------------------------
+You need to have `quarter-master-frontend` checked out.
 
-* [NASA](https://api.nasa.gov)
-* [IBM](https://docs.cloudant.com/api.html)
-* [Sony](http://developers.cimediacloud.com)
-* [Best Buy](https://bestbuyapis.github.io/api-documentation/)
-* [Travis-CI](https://docs.travis-ci.com/api/)
-* [Greenhouse](https://developers.greenhouse.io/harvest.html)
-* [Woocommerce](http://woocommerce.github.io/woocommerce-rest-api-docs/)
-* [Appium](http://appium.io/slate/en/master)
-* [Dwolla](https://docs.dwolla.com/)
-* [Clearbit](https://clearbit.com/docs)
-* [Coinbase](https://developers.coinbase.com/api)
-* [Parrot Drones](http://developer.parrot.com/docs/bebop/)
-* [Fidor Bank](http://docs.fidor.de/)
-* [Scale](https://docs.scaleapi.com/)
+    export QM_FE_PATH=/foo/bar/quarter-master-frontend
 
-You can view more in [the list on the wiki](https://github.com/lord/slate/wiki/Slate-in-the-Wild).
+First build the compressed version of the docs:
 
-Need Help? Found a bug?
---------------------
+    bundle exec middleman build --clean
 
-[Submit an issue](https://github.com/lord/slate/issues) to the Slate GitHub if you need any help. And, of course, feel free to submit pull requests with bug fixes or changes.
+Remove the old compressed files:
 
-Contributors
---------------------
+    rm -rf $QM_FE_PATH/docs
 
-Slate was built by [Robert Lord](https://lord.io) while interning at [TripIt](https://www.tripit.com/).
+Copy new doc files:
 
-Thanks to the following people who have submitted major pull requests:
+    cp -R build $QM_FE_PATH/docs
 
-- [@chrissrogers](https://github.com/chrissrogers)
-- [@bootstraponline](https://github.com/bootstraponline)
-- [@realityking](https://github.com/realityking)
-- [@cvkef](https://github.com/cvkef)
-
-Also, thanks to [Sauce Labs](http://saucelabs.com) for sponsoring the development of the responsive styles.
-
-Special Thanks
---------------------
-- [Middleman](https://github.com/middleman/middleman)
-- [jquery.tocify.js](https://github.com/gfranko/jquery.tocify.js)
-- [middleman-syntax](https://github.com/middleman/middleman-syntax)
-- [middleman-gh-pages](https://github.com/edgecase/middleman-gh-pages)
-- [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
+Now switch to FE directory, add the changes and make a PR/merge as usual.
