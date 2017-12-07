@@ -1,10 +1,8 @@
 # Organizations
 
-Organizations represent the highest level concept under which your infrastructure assets live.
+Organizations represent the highest level resource under which most of the infrastructure assets live.
 
 When you log into Stackpoint.io for the first time, we automatically create an organization for you. You can customize the name and logo of this organization on the [Organization Setup](https://stackpoint.io/organization/setup) page.
-
-Before you can start creating cluster you must retrieve the `ID` of the organization that it will be created under.
 
 ## Get All Organizations
 
@@ -38,11 +36,11 @@ curl "https://api.stackpoint.io/orgs"
 
 This endpoint retrieves all organizations that you are associated with.
 
+The `pk` attribute in the response denotes the organization ID.
+
 ### HTTP Request
 
 `GET https://api.stackpoint.io/orgs`
-
-The `pk` attribute denotes the organization ID.
 
 ## Get a Specific Organization
 
@@ -74,4 +72,4 @@ This endpoint retrieves a specific organization.
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the organization to retrieve
+ID | ID of the organization

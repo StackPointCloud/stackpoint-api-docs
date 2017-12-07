@@ -1,10 +1,14 @@
 # Clusters
 
-Clusters are one of the most important API entities in the StackPointCloud system.
+Clusters are one of the most important resource in the StackPointCloud system.
 
-Clusters are scope under organizations as well as workspaces.
+Clusters are scoped under organizations as well as workspaces.
+
+<aside class="info">You need to find your [organization ID(s)](#get-all-organizations) and [keyset IDs](#get-all-keysets) in order to work with cluster endpoints.</aside>
 
 ## Get All Clusters
+
+The `pk` attribute in the response denotes the cluster ID.
 
 ```shell
 curl "https://api.stackpoint.io/orgs/4/clusters"
@@ -110,7 +114,7 @@ This endpoint retrieves all clusters available under a specific organization.
 
 Parameter | Description
 --------- | -----------
-ORG_ID | The ID of the organization
+ORG_ID | ID of the organization
 
 
 ## Get a Specific Cluster
@@ -217,8 +221,8 @@ This endpoint retrieves a specific cluster available under a specific organizati
 
 Parameter | Description
 --------- | -----------
-ORG_ID | The ID of the organization
-ID | The ID of the cluster
+ORG_ID | ID of the organization
+ID | ID of the cluster
 
 ## Create a Cluster
 
@@ -371,7 +375,6 @@ curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
 
 Create a DigitalOcean cluster.
 
-
 ## Delete a Cluster
 
 ```shell
@@ -389,5 +392,5 @@ This endpoint will delete the cluster and all nodes, solutions and volumes assoc
 
 Parameter | Description
 --------- | -----------
-ORG_ID | The ID of the organization
+ORG_ID | ID of the organization
 ID | ID of the cluster

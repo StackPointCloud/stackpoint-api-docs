@@ -5,7 +5,7 @@ Each cluster in the StackPointCloud system can have 3 or more nodes.
 ## Get All Nodes of a Cluster
 
 ```shell
-curl "https://api.stackpoint.io/orgs/4/clusters/12/nodes"
+curl -x GET "https://api.stackpoint.io/orgs/4/clusters/12/nodes"
   -H "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5"
 ```
 
@@ -244,7 +244,7 @@ curl -X GET "https://api.stackpoint.io/orgs/4/clusters/12/nodes/81/can_delete"
 
 This endpoint checks whether a specific node can be deleted.
 
-`GET https://api.stackpoint.io/orgs/<ORG_ID>/clusters?<CLUSTER_ID>/nodes/can_delete`
+`GET https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<CLUSTER_ID>/nodes/can_delete`
 
 ### URL Parameters
 

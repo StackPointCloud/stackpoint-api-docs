@@ -67,6 +67,8 @@ curl "https://api.stackpoint.io/orgs/<ORG_ID>/keysets"
 
 This endpoint retrieves all keysets available to under a specific organization.
 
+The `pk` attribute in the response denotes the keyset ID.
+
 ### HTTP Request
 
 `GET https://api.stackpoint.io/orgs/<ORG_ID>/keysets`
@@ -75,7 +77,7 @@ This endpoint retrieves all keysets available to under a specific organization.
 
 Parameter | Description
 --------- | -----------
-ORG_ID | The ID of the organization
+ORG_ID | ID of the organization
 
 ## Get a Specific Keyset
 
@@ -109,7 +111,7 @@ curl "https://api.stackpoint.io/orgs/1/keysets/25"
 }
 ```
 
-This endpoint retrieves a specific kesyet.
+This endpoint retrieves a specific keyset.
 
 ### HTTP Request
 
@@ -119,8 +121,8 @@ This endpoint retrieves a specific kesyet.
 
 Parameter | Description
 --------- | -----------
-ORG_ID | The ID of the organization
-ID | The ID of the keyset to retrieve
+ORG_ID | ID of the organization
+ID | ID of the keyset
 
 ## Create a Keyset
 
@@ -228,7 +230,7 @@ Create an AWS keyset by sending the appropriate keys.
 
 Parameter | Description
 --------- | -----------
-ORG_ID | The ID of the organization
+ORG_ID | ID of the organization
 
 ## Delete a Keyset
 
@@ -241,4 +243,13 @@ curl -X DELETE "https://api.stackpoint.io/orgs/1/keysets/25"
 
 This endpoint deletes a specific keyset. All associated keys are removed.
 
-<aside class="warning">If you remove a provider keyset that is associated with a running cluster, then you can no longer make changes to the cluster.</aside>
+### HTTP Request
+
+`DELETE https://api.stackpoint.io/orgs/<ORG_ID>/keysets/<ID>`
+
+Parameter | Description
+--------- | -----------
+ORG_ID | ID of the organization
+ID | ID of the keyset
+
+<aside class="warning">If you remove a provider keyset that is associated with a running cluster, then you will no longer be able to add or remove nodes or delete the cluster cleanly.</aside>
