@@ -13,7 +13,7 @@ includes:
   - organizations
   - keysets
   - clusters
-  - errors
+  - nodes
 
-search: false
+search: true
 ---

@@ -30,3 +30,17 @@ The API key should be included in all API request to the server in a header that
 <aside class="notice">
 You must replace <code>d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5</code> with your personal API key.
 </aside>
+
+# Response Codes
+
+Stackpoint API uses the following response codes:
+
+Response Code | Meaning
+------------- | -------
+400 | Bad Request -- The data sent with the request is not valid
+401 | Unauthorized -- You have not provided an API key or provided an invalid API key
+403 | Forbidden -- You are not allowed to access this endpoint or resource
+404 | Not Found -- The endpoint or resource was not found
+405 | Method Not Allowed -- The endpoint does not allow this method
+500 | Internal Server Error -- We had a problem with our server. Try again later.
+503 | Service Unavailable -- We're temporarily offline or experiencing outage. Please try again later.

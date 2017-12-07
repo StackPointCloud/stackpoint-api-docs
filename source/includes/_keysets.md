@@ -132,7 +132,9 @@ There are 3 categories of keysets that can be created using the API.
 
 Each keyset contains one or more Keys.
 
-### Keyset Attributes
+### Request Data Attributes
+
+#### Keyset Attributes
 
 Parameter | Type | Description
 --------- | ---- | -----------
@@ -145,14 +147,14 @@ entity | string | Specific entity the keyset applies to, differs by category:
 workspaces | list of integer | A list of IDs for workspaces within the organization to which the keyset will be restricted to. Leave empty to allow organization wide access
 keys | list of objects | A list of keys to attach to keyset
 
-### Key Attributes
+#### Key Attributes
 
 Parameter | Type | Description
 --------- | ---- | -----------
 key_type | string | Type of key. Varies by keyset category and entity
 key | string | Value stored in the key. Encrypted before storing to DB. Value not returned in GET requests
 
-### List of Key Types and Keys for Providers
+#### List of Key Types and Keys for Providers
 
 When creating a keyset the required # of keys must be passed.
 
@@ -168,7 +170,7 @@ Entity | # of Keys | Key Type | Data Type | Key
 `gce` | 1 | `other` | string | <a href="https://stackpointcloud.com/community/tutorial/google-compute-engine-setup-and-authentication" target="_blank">Service Account JSON</a>
 `gke` | 1 | `other` | string | <a href="https://stackpointcloud.com/community/tutorial/how-to-create-auth-credentials-on-google-container-engine-gke" target="_blank">Service Account JSON</a>
 
-### List of Key Types and Keys for Solutions
+#### List of Key Types and Keys for Solutions
 
 Entity | # of Keys | Key Type | Data Type | Key
 ------ | --------- | -------- | --------- | ---
@@ -178,7 +180,7 @@ Entity | # of Keys | Key Type | Data Type | Key
  | | `password` | string | Password
  | | `scope` | string | Value must be `external`
 
-### List of Key Types and Keys for SSH
+#### List of Key Types and Keys for SSH
 \# of Keys | Key Type | Data Type | Key
 --------- | -------- | --------- | ---
 1 | `pub` | string | SSH Public key
