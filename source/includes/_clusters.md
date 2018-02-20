@@ -215,7 +215,7 @@ This endpoint retrieves a specific cluster available under a specific organizati
 
 ### HTTP Request
 
-`GET https://api.stackpoint.io/orgs/<ORG_ID>/clusters<ID>`
+`GET https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<ID>`
 
 ### URL Parameters
 
