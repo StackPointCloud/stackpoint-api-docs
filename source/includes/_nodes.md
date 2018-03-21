@@ -266,7 +266,7 @@ curl -X DELETE "https://api.stackpoint.io/orgs/4/clusters/12/nodes/81"
 
 This endpoint deletes a specific node.
 
-`DELETE https://api.stackpoint.io/orgs/<ORG_ID>/clusters?<CLUSTER_ID>/nodes/<ID>`
+`DELETE https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<CLUSTER_ID>/nodes/<ID>`
 
 ### URL Parameters
 

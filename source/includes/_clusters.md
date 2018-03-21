@@ -239,10 +239,10 @@ provider | string | Any of: AWS: `aws`, Azure: `azure`, DigitalOcean: `do`, GCE:
 provider_keyset | integer | ID of the provider keyset
 master_count | integer | Number of master. Only valid value for cluster creation request is `1`
 master_size | string | Size of master. Consult provider documentation for instance sizes
-worker_count | integer | Number of workers
-master_size | string | A single size for all workers. Minimum value `2`. Consult provider documentation for instance sizes
-region | string | Provider region value. For GCE, GKE send zone value
-zone | string | Provider zone. Currently used only for AWS
+worker_count | integer | Number of workers. Minimum value `2`
+worker_size | string | A single size for all workers. Consult provider documentation for instance sizes
+region | string | Provider region value. For GCE and GKE, send Google's "Zone" value here
+zone | string | Provider zone. AWS only
 provider_network_id | string | VPC ID. AWS only
 provider_network_cidr | string | VPC CIDR. AWS only
 provider_subnet_id | string | Subnet ID. AWS only
@@ -269,7 +269,7 @@ solutions | A list of solution objects
 Parameter | Type | Description
 --------- | ---- | -----------
 solution | string | Solution to be installed. Current options are: `istio`, `fabric8`, `turbonomic`, `cloudflare-warp-ingress`, `prometheus`, `efk`, `sysdig`, `haproxy`, `linkerd`, `netsil`, `autoscaler`, `helm_tiller`, `gitlab`, `gitlab_ee`, `kubeless`, `calico`
-keyset | string | ID of the solution keyset to use. Must belong to same organization (and workspace if applicable) as the cluster. Valid only for solutions: `turbonomic` and `sysdig`
+keyset | integer | ID of the solution keyset to use. Must belong to same organization (and workspace if applicable) as the cluster. Valid only for solutions: `turbonomic` and `sysdig`
 max_nodes | integer | Number of nodes the autoscaler should scale to. Valid only for `autoscaler`
 
 ### HTTP Request
