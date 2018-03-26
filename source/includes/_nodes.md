@@ -177,7 +177,7 @@ curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
 ```json
 {
     "node_count": 1,
-    "size": "2gb"
+    "size": "2gb",
     "role": "master"
 }
 ```
@@ -207,7 +207,7 @@ curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
 ```json
 {
     "node_count": 3,
-    "size": "2gb",
+    "size": "2gb"
 }
 ```
 
