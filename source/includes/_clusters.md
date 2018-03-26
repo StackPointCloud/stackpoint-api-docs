@@ -256,7 +256,7 @@ platform | string | Linux distribution to use. Options are:
  | | Azure: `coreos`, `ubuntu`
  | | DigitalOcean: `coreos`, `ubuntu`
  | | GCE: `coreos`, `ubuntu`
- | | GKE: `gci`
+ | | GKE: `gci` (send gci for "cos" as well)
 channel | string | Distribution version to use. Options are:
  | | CoreOS: `stable`, `beta`, `alpha`
  | | Ubuntu: `16.04-lts`

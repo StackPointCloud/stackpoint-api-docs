@@ -120,7 +120,12 @@ Parameter | Type | Description
 name | string | Name of the nodepool
 instance_size | string | Instance size for the nodes. Consult provider documentation for available instance sizes.
 node_count | integer | Number of nodes to add
-role | string | Type of nodes. Only valid value: `worker`
+platform | string | Linux distribution to use. Options are:
+ | | AWS: `coreos`, `ubuntu`
+ | | Azure: `coreos`, `ubuntu`
+ | | DigitalOcean: `coreos`, `ubuntu`
+ | | GCE: `coreos`, `ubuntu`
+ | | GKE: `gci` (send gci for "cos" as well)
 zone | string | The zone where the node should be added. Valid only for master nodes on AWS
 provider_subnet_id | string | ID of Subnet where node should be added. Valid only for master nodes on AWS
 provider_subnet_cidr | string | Subnet CIDR. Valid only for master nodes on AWS
@@ -143,7 +148,7 @@ curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
     "name": "Awesome Node Pool",
     "instance_size": "n1-standard-2",
     "node_count": 4,
-    "role": "worker"
+    "platform": "coreos"
 }
 ```
 
