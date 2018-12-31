@@ -313,7 +313,7 @@ curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
     "worker_size": "t2.large",
     "region": "us-west-2",
     "zone": "us-west-2a",
-    "provider_network_id": "vpc-c4a6f5a0"
+    "provider_network_id": "vpc-c4a6f5a0",
     "provider_network_cidr": "172.22.0.0/16",
     "provider_subnet_id": "subnet-d19044b6",
     "provider_subnet_cidr": "172.22.4.0/24",
