@@ -1,75 +1,222 @@
 # Organizations
 
-Organizations represent the highest level resource under which most of the infrastructure assets live.
+## Overview
 
-When you log into Stackpoint.io for the first time, we automatically create an organization for you. You can customize the name and logo of this organization on the [Organization Setup](https://stackpoint.io/organization/setup) page.
+Organizations are the highest-level resource. The Organizations resource contains information about the Organization. This includes the ID, which is required for most other API calls.
 
-## Get All Organizations
+### Background
 
-```shell
-curl "https://api.stackpoint.io/orgs"
-  -H "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5"
+The first time you log in to Stackpoint.io, we automatically create an Organization for you. You can customize the name and logo of this Organization on the [Organization Setup](https://stackpoint.io/organization/setup) page.
+
+## GET /orgs
+
+> Example request:
+
+```
+curl -X GET \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+"https://api.stackpoint.io/orgs"
 ```
 
-> The above command returns JSON structured like this:
+> Example response:
 
-```json
+```
 [
   {
-    "pk": 1,
-    "name": "Hushy Wind",
-    "slug": "hushy-wind",
-    "logo": "https://stackpoint_production.s3.amazonaws.com/organization_logos/hushy_wind.jpg",
-    "created": "2017-04-10T10:48:21.368163Z",
-    "updated": "2017-04-10T10:48:21.368190Z"
+    "pk": 11644,
+    "name": "Company Organization",
+    "slug": "company-organization",
+    "logo": null,
+    "created": "2018-09-24T18:23:22.889260Z",
+    "updated": "2018-09-24T18:23:22.889291Z"
   },
   {
-    "pk": 2,
-    "name": "Withered Spoon",
-    "slug": "withered-spoon",
-    "logo": "https://stackpoint_production.s3.amazonaws.com/organization_logos/withered_spoon.jpg",
-    "created": "2016-05-24T23:30:45.866581Z",
-    "updated": "2017-04-12T20:42:55.167792Z"
+    "pk": 381,
+    "name": "My Organization",
+    "slug": "my-organization",
+    "logo": null,
+    "created": "2018-08-05T14:35:53.161852Z",
+    "updated": "2019-01-31T18:31:21.583756Z"
   }
 ]
 ```
 
-This endpoint retrieves all organizations that you are associated with.
+Get the list of Organizations of which the user is a member.
 
-The `pk` attribute in the response denotes the organization ID.
+### Return Values
 
-### HTTP Request
+**Name** | **Description**
+---------|-----------------
+**pk** | Organization ID.
+**name** | Organization name.
+**slug** | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**logo** | Organization logo. This value is `null` if a custom logo has not been set.
+**created** | Timestamp of the Organization's create date.
+**updated** | Timestamp of the last update to the Organization
 
-`GET https://api.stackpoint.io/orgs`
+## POST /orgs
 
-## Get a Specific Organization
+> Example Request:
 
-```shell
-curl "https://api.stackpoint.io/orgs/1"
-  -H "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5"
+```
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+-d @postorg.json \
+"https://api.stackpoint.io/orgs"
 ```
 
-> The above command returns JSON structured like this:
+> Contents of `postorg.json`:
 
-```json
+```
 {
-  "pk": 1,
-  "name": "Hushy Wind",
-  "slug": "hushy-wind",
-  "logo": "https://stackpoint_production.s3.amazonaws.com/organization_logos/hushy_wind.jpg",
-  "created": "2017-04-10T10:48:21.368163Z",
-  "updated": "2017-04-10T10:48:21.368190Z"
+  "name": "My New Organization",
+  "slug": "my-new-organization"
 }
 ```
 
-This endpoint retrieves a specific organization.
+>  Example Response. If the new Organization is created successfully, the API will return a list of all Organizations of which the user is a member, including the newly-created Organization. The new Organization is listed first.
 
-### HTTP Request
+```
+[
+ {
+    pk": 15055,
+    "name": "My New Organization",
+    "slug": "my-new-organization",
+    "logo": "null",
+    "created": "2019-01-31T20:32:01.041059Z",
+    "updated": "2019-01-31T20:32:01.041093Z"
+},
+  {
+    "pk": 381,
+    "name": "My Organization",
+    "slug": "my-organization",
+    "logo": null,
+    "created": "2018-08-05T14:35:53.161852Z",
+    "updated": "2019-01-31T18:31:21.583756Z"
+  }
+]
+```
 
-`GET https://api.stackpoint.io/orgs/<ID>`
+Create a new Organization in the user's account.
 
-### URL Parameters
+### Values
 
-Parameter | Description
---------- | -----------
-ID | ID of the organization
+**Name** | **Required** | **Description**
+---------|--------------|----------------
+**name** | Yes | Organization name.
+**slug** | No | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**logo** | No | URL of the Organization logo. This value is `null` if a custom logo has not been set.
+
+### Return Values
+
+**Name** | **Description**
+---------|-----------------
+**pk** | Organization ID.
+**name** | Organization name.
+**slug** | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**logo** | Organization logo. This value is `null` if a custom logo has not been set.
+**created** | Timestamp of the Organization's create date.
+**updated** | Timestamp of the last update to the Organization
+
+## GET /orgs/{Org ID}
+
+> Example request:
+
+```
+curl -X GET \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+"https://api.stackpoint.io/orgs/381"
+```
+
+> Example response:
+
+```
+{
+  "pk": 381,
+  "name": "My Organization",
+  "slug": "my-organization",
+  "logo": null,
+  "created": "2016-08-05T14:35:53.161852Z",
+  "updated": "2019-01-31T18:31:21.583756Z"
+}
+```
+
+Get information for a specific Organization.
+
+**Path Parameter**
+
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+
+
+### Return Values
+
+**Name** | **Description**
+---------|-----------------
+**pk** | Organization ID.
+**name** | Organization name.
+**slug** | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**logo** | Organization logo. This value is `null` if a custom logo has not been set.
+**created** | Timestamp of the Organization's create date.
+**updated** | Timestamp of the last update to the Organization
+
+## PATCH /orgs/{Org ID}
+
+> Example Request
+
+```
+curl -X PATCH \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+-d @postorg.json \
+"https://api.stackpoint.io/orgs"
+```
+> Contents of `postorg.json`:
+
+```
+{
+  "name": "New Organization Name",
+  "slug": "new-organization-name"
+}
+```
+
+> Example Response
+
+```
+{
+  "pk": 15055,
+  "name": "New Organization Name",
+  "slug": "new-organization-name",
+  "logo": null,
+  "created": "2019-01-31T20:32:01.041059Z",
+  "updated": "2019-01-31T21:21:07.607210Z"
+}
+```
+Update information for an existing Organization.
+
+**Path Parameter**
+
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+
+### Values
+
+**Name** | **Required** | **Description**
+---------|--------------|----------------
+**name** | Yes | Organization name.
+**slug** | No | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**logo** | No | URL of the Organization logo. This value is `null` if a custom logo has not been set.
+
+### Return Values
+
+**Name** | **Description**
+---------|-----------------
+**pk** | Organization ID.
+**name** | Organization name.
+**slug** | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**logo** | Organization logo. This value is `null` if a custom logo has not been set.
+**created** | Timestamp of the Organization's create date.
+**updated** | Timestamp of the last update to the Organization
