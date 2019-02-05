@@ -1,6 +1,4 @@
-# Stackpoint API Docs
-
-The compressed docs site currently reside in the UI repo, which is debatable. Ideally we would have docs.stackpoint.io or something like that.
+# NKS API Docs
 
 The original Slate docs are [here](./slate.md).
 
@@ -40,11 +38,11 @@ Access the doc site at:
 
 ## Editing Basics
 
-Each high level API resource should have it's own file under:
+Each high level API resource should have its own file under:
 
-    source/includes/_<resource_name>.md
+    source/includes/_[resource_name].md
 
-Then insert `_<resource_name>.md` in the includes list in `index.html.md`.
+Then insert `_[resource_name].md` in the includes list in `index.html.md`.
 
 Changes appear on the local doc site on refresh.
 
