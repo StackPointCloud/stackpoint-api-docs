@@ -49,7 +49,7 @@ Get the list of Organizations of which the user is a member.
 ---------|-----------------
 **pk** | Organization ID.
 **name** | Organization name.
-**slug** | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**slug** | A human-readable unique identifier, used for storing Organization data.
 **logo** | Organization logo. This value is `null` if a custom logo has not been set.
 **created** | Timestamp of the Organization's create date.
 **updated** | Timestamp of the last update to the Organization
@@ -71,7 +71,6 @@ curl -X POST \
 ```shell
 {
   "name": "My New Organization",
-  "slug": "my-new-organization"
 }
 ```
 
@@ -83,7 +82,7 @@ curl -X POST \
     "pk": 15055,
     "name": "My New Organization",
     "slug": "my-new-organization",
-    "logo": "null",
+    "logo": null,
     "created": "2019-01-31T20:32:01.041059Z",
     "updated": "2019-01-31T20:32:01.041093Z"
 },
@@ -105,8 +104,7 @@ Create a new Organization in the user's account.
 **Name** | **Required** | **Description**
 ---------|--------------|----------------
 **name** | Yes | Organization name.
-**slug** | No | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
-**logo** | No | URL of the Organization logo. This value is `null` if a custom logo has not been set.
+**logo** | Organization logo. This value is `null` if a custom logo has not been set. To set a custom logo, send the request as content type `application/x-www-form-urlencoded`.
 
 ### Return Values
 
@@ -114,7 +112,7 @@ Create a new Organization in the user's account.
 ---------|-----------------
 **pk** | Organization ID.
 **name** | Organization name.
-**slug** | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**slug** | A human-readable unique identifier, used for storing Organization data.
 **logo** | Organization logo. This value is `null` if a custom logo has not been set.
 **created** | Timestamp of the Organization's create date.
 **updated** | Timestamp of the last update to the Organization
@@ -157,7 +155,7 @@ Get information for a specific Organization.
 ---------|-----------------
 **pk** | Organization ID.
 **name** | Organization name.
-**slug** | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**slug** | A human-readable unique identifier, used for storing Organization data.
 **logo** | Organization logo. This value is `null` if a custom logo has not been set.
 **created** | Timestamp of the Organization's create date.
 **updated** | Timestamp of the last update to the Organization
@@ -171,7 +169,7 @@ curl -X PATCH \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
 -d @postorg.json \
-"https://api.stackpoint.io/orgs"
+"https://api.stackpoint.io/orgs/{Org_ID}"
 ```
 > Contents of `postorg.json`:
 
@@ -207,8 +205,7 @@ Update information for an existing Organization.
 **Name** | **Required** | **Description**
 ---------|--------------|----------------
 **name** | Yes | Organization name.
-**slug** | No | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
-**logo** | No | URL of the Organization logo. This value is `null` if a custom logo has not been set.
+**logo** | Organization logo. This value is `null` if a custom logo has not been set. To set a custom logo, send the request as content type `application/x-www-form-urlencoded`.
 
 ### Return Values
 
@@ -216,7 +213,7 @@ Update information for an existing Organization.
 ---------|-----------------
 **pk** | Organization ID.
 **name** | Organization name.
-**slug** | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**slug** | A human-readable unique identifier, used for storing Organization data.
 **logo** | Organization logo. This value is `null` if a custom logo has not been set.
 **created** | Timestamp of the Organization's create date.
 **updated** | Timestamp of the last update to the Organization
