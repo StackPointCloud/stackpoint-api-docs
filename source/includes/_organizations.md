@@ -12,7 +12,7 @@ The first time you log in to Stackpoint.io, we automatically create an Organizat
 
 > Example request:
 
-```
+```shell
 curl -X GET \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
 "https://api.stackpoint.io/orgs"
@@ -20,7 +20,7 @@ curl -X GET \
 
 > Example response:
 
-```
+```json
 [
   {
     "pk": 11644,
@@ -58,7 +58,7 @@ Get the list of Organizations of which the user is a member.
 
 > Example Request:
 
-```
+```shell
 curl -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
@@ -68,7 +68,7 @@ curl -X POST \
 
 > Contents of `postorg.json`:
 
-```
+```shell
 {
   "name": "My New Organization",
   "slug": "my-new-organization"
@@ -77,10 +77,10 @@ curl -X POST \
 
 >  Example Response. If the new Organization is created successfully, the API will return a list of all Organizations of which the user is a member, including the newly-created Organization. The new Organization is listed first.
 
-```
+```json
 [
  {
-    pk": 15055,
+    "pk": 15055,
     "name": "My New Organization",
     "slug": "my-new-organization",
     "logo": "null",
@@ -123,7 +123,7 @@ Create a new Organization in the user's account.
 
 > Example request:
 
-```
+```shell
 curl -X GET \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
 "https://api.stackpoint.io/orgs/381"
@@ -131,7 +131,7 @@ curl -X GET \
 
 > Example response:
 
-```
+```json
 {
   "pk": 381,
   "name": "My Organization",
@@ -166,7 +166,7 @@ Get information for a specific Organization.
 
 > Example Request
 
-```
+```shell
 curl -X PATCH \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
@@ -175,7 +175,7 @@ curl -X PATCH \
 ```
 > Contents of `postorg.json`:
 
-```
+```json
 {
   "name": "New Organization Name",
   "slug": "new-organization-name"
@@ -184,7 +184,7 @@ curl -X PATCH \
 
 > Example Response
 
-```
+```json
 {
   "pk": 15055,
   "name": "New Organization Name",

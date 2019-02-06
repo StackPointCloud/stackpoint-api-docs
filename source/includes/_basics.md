@@ -19,7 +19,7 @@ NOTE: The API only accepts keys from accounts which have the role of `Owner` in 
 
 ## Usage
 
-```
+```shell
 curl -X GET \
 -H "Authorization: Bearer abcdef123456789abcdev123456789" \
 "https://api.stackpoint.io/orgs"
@@ -42,7 +42,7 @@ In this example, the user's organization ID is `381`:
 
 ### Example
 
-```
+```shell
 curl -X GET \
 -H "Authorization: Bearer {API token}" \
 "https://api.stackpoint.io/orgs/{Org ID}/clusters"
@@ -52,7 +52,7 @@ The query on the right returns a list of your current active clusters within the
 
 > For example:
 
-```
+```shell
 curl -X GET \
 -H "Authorization: Bearer abcdef123456789abcdev123456789" \
 "https://api.stackpoint.io/orgs/381/clusters"
@@ -62,7 +62,7 @@ curl -X GET \
 
 > Example using the `-i` flag to view all headers:
 
-```
+```shell
 curl -i -X PATCH \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer abcdef123456789abcdev123456789" \
@@ -71,7 +71,7 @@ curl -i -X PATCH \
 
 > This query will trigger a 400 error. Using the -i flag returns the additional response:
 
-```
+```json
 {"detail":"JSON parse error - Expecting property name enclosed in double quotes: line 1 column 72 (char 71)"}
 ```
 
