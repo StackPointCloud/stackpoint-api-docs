@@ -37,7 +37,7 @@ Note: You can also fetch your current organization ID from [the Organizations re
 
 In this example, the user's organization ID is `381`:
 
-![API token example code](images/api-token-example-code.png "API token example code")
+![API token example code](/source/images/api-token-example-code.png?raw=true "API token example code")
 
 
 ### Example
