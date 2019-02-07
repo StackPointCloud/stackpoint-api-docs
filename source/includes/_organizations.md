@@ -23,7 +23,7 @@ curl -X GET \
 ```json
 [
   {
-    "pk": 11644,
+    "pk": 2,
     "name": "Company Organization",
     "slug": "company-organization",
     "logo": null,
@@ -31,7 +31,7 @@ curl -X GET \
     "updated": "2018-09-24T18:23:22.889291Z"
   },
   {
-    "pk": 381,
+    "pk": 1,
     "name": "My Organization",
     "slug": "my-organization",
     "logo": null,
@@ -79,7 +79,7 @@ curl -X POST \
 ```json
 [
  {
-    "pk": 15055,
+    "pk": 2,
     "name": "My New Organization",
     "slug": "my-new-organization",
     "logo": null,
@@ -87,7 +87,7 @@ curl -X POST \
     "updated": "2019-01-31T20:32:01.041093Z"
 },
   {
-    "pk": 381,
+    "pk": 1,
     "name": "My Organization",
     "slug": "my-organization",
     "logo": null,
@@ -123,14 +123,14 @@ Create a new Organization in the user's account.
 ```shell
 curl -X GET \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
-"https://api.stackpoint.io/orgs/381"
+"https://api.stackpoint.io/orgs/2"
 ```
 
 > Example response:
 
 ```json
 {
-  "pk": 381,
+  "pk": 2,
   "name": "My Organization",
   "slug": "my-organization",
   "logo": null,
@@ -168,7 +168,7 @@ curl -X PATCH \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
 -d @postorg.json \
-"https://api.stackpoint.io/orgs/381"
+"https://api.stackpoint.io/orgs/2"
 ```
 > Contents of `postorg.json`:
 
@@ -185,14 +185,14 @@ curl -X PATCH \
 -H "Content-Type: multipart/form-data" \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
 -F name="New Organization Name" \
-"https://api.stackpoint.io/orgs/381"
+"https://api.stackpoint.io/orgs/2"
 ```
 
 > Example Response
 
 ```json
 {
-  "pk": 15055,
+  "pk": 2,
   "name": "New Organization Name",
   "slug": "new-organization-name",
   "logo": null,
@@ -208,14 +208,14 @@ curl -X PATCH \
 -H "Content-Type: multipart/form-data" \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
 -F logo=@/path/to/file.jpg \
-"https://api.stackpoint.io/orgs/381"
+"https://api.stackpoint.io/orgs/2"
 ```
 
 > Example response:
 
 ```json
 {
-  "pk": 381,
+  "pk": 2,
   "name": "New Organization Name",
   "slug": "new-organization-name",
   "logo": "https:\/\/stackpoint_production.s3.amazonaws.com\/organization_logos\/logo.jpg",
