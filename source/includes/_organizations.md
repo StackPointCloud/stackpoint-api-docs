@@ -104,7 +104,6 @@ Create a new Organization in the user's account.
 **Name** | **Required** | **Description**
 ---------|--------------|----------------
 **name** | Yes | Organization name.
-**logo** | Organization logo. This value is `null` if a custom logo has not been set. To set a custom logo, send the request as content type `application/x-www-form-urlencoded`.
 
 ### Return Values
 
@@ -162,22 +161,31 @@ Get information for a specific Organization.
 
 ## PATCH /orgs/{Org ID}
 
-> Example Request
+> Example Request: Update the Organization name from the contents of a JSON file:
 
 ```shell
 curl -X PATCH \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
 -d @postorg.json \
-"https://api.stackpoint.io/orgs/{Org_ID}"
+"https://api.stackpoint.io/orgs/381"
 ```
 > Contents of `postorg.json`:
 
 ```json
 {
   "name": "New Organization Name",
-  "slug": "new-organization-name"
 }
+```
+
+> Alternate example: Update the Organization name as form data:
+
+```shell
+curl -X PATCH \
+-H "Content-Type: multipart/form-data" \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+-F name="New Organization Name" \
+"https://api.stackpoint.io/orgs/{Org ID}"
 ```
 
 > Example Response
@@ -192,6 +200,30 @@ curl -X PATCH \
   "updated": "2019-01-31T21:21:07.607210Z"
 }
 ```
+
+> Example request: Update the Organization logo as form data:
+
+```shell
+curl -X PATCH \
+-H "Content-Type: multipart/form-data" \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+-F logo=@/path/to/file.jpg \
+"https://api.stackpoint.io/orgs/{Org ID}"
+```
+
+> Example response:
+
+```json
+{
+  "pk": 381,
+  "name": "New Organization Name",
+  "slug": "new-organization-name",
+  "logo": "https:\/\/stackpoint_production.s3.amazonaws.com\/organization_logos\/logo.jpg",
+  "created": "2016-08-05T14:35:53.161852Z",
+  "updated": "2019-02-07T16:25:37.224597Z"
+}
+```
+
 Update information for an existing Organization.
 
 **Path Parameter**
@@ -205,7 +237,7 @@ Update information for an existing Organization.
 **Name** | **Required** | **Description**
 ---------|--------------|----------------
 **name** | Yes | Organization name.
-**logo** | Organization logo. This value is `null` if a custom logo has not been set. To set a custom logo, send the request as content type `application/x-www-form-urlencoded`.
+**logo** | No | Organization logo. This value is `null` if a custom logo has not been set. To set a custom logo, send it as content type `multipart/form-data` as shown on the right.
 
 ### Return Values
 

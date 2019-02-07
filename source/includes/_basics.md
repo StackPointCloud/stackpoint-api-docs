@@ -10,7 +10,7 @@ The full resource URL for the NKS API is `https://api.stackpoint.io`.
 
 All API requests must be authenticated with your API token. To obtain a token:
 
-1. Register or login at [Stackpoint.io](https://stackpoint.io).
+1. Register or log in at [Stackpoint.io](https://stackpoint.io).
 2. Click your profile avatar in the top right corner and select `Edit Profile` or visit [the profile page](https://stackpoint.io/user/profile) directly.
 3. In the **API Tokens** section, click **Add Token**.
 4. Copy the token and save it somewhere safe. This is your only chance to view your API token. The token cannot be displayed after you leave or reload the page.
