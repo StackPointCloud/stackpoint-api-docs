@@ -23,7 +23,7 @@ curl -X GET \
 ```json
 [
   {
-    "pk": 11644,
+    "pk": 2,
     "name": "Company Organization",
     "slug": "company-organization",
     "logo": null,
@@ -31,7 +31,7 @@ curl -X GET \
     "updated": "2018-09-24T18:23:22.889291Z"
   },
   {
-    "pk": 381,
+    "pk": 1,
     "name": "My Organization",
     "slug": "my-organization",
     "logo": null,
@@ -49,7 +49,7 @@ Get the list of Organizations of which the user is a member.
 ---------|-----------------
 **pk** | Organization ID.
 **name** | Organization name.
-**slug** | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**slug** | A human-readable unique identifier, used for storing Organization data.
 **logo** | Organization logo. This value is `null` if a custom logo has not been set.
 **created** | Timestamp of the Organization's create date.
 **updated** | Timestamp of the last update to the Organization
@@ -71,7 +71,6 @@ curl -X POST \
 ```shell
 {
   "name": "My New Organization",
-  "slug": "my-new-organization"
 }
 ```
 
@@ -80,15 +79,15 @@ curl -X POST \
 ```json
 [
  {
-    "pk": 15055,
+    "pk": 2,
     "name": "My New Organization",
     "slug": "my-new-organization",
-    "logo": "null",
+    "logo": null,
     "created": "2019-01-31T20:32:01.041059Z",
     "updated": "2019-01-31T20:32:01.041093Z"
 },
   {
-    "pk": 381,
+    "pk": 1,
     "name": "My Organization",
     "slug": "my-organization",
     "logo": null,
@@ -105,8 +104,6 @@ Create a new Organization in the user's account.
 **Name** | **Required** | **Description**
 ---------|--------------|----------------
 **name** | Yes | Organization name.
-**slug** | No | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
-**logo** | No | URL of the Organization logo. This value is `null` if a custom logo has not been set.
 
 ### Return Values
 
@@ -114,7 +111,7 @@ Create a new Organization in the user's account.
 ---------|-----------------
 **pk** | Organization ID.
 **name** | Organization name.
-**slug** | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**slug** | A human-readable unique identifier, used for storing Organization data.
 **logo** | Organization logo. This value is `null` if a custom logo has not been set.
 **created** | Timestamp of the Organization's create date.
 **updated** | Timestamp of the last update to the Organization
@@ -126,14 +123,14 @@ Create a new Organization in the user's account.
 ```shell
 curl -X GET \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
-"https://api.stackpoint.io/orgs/381"
+"https://api.stackpoint.io/orgs/2"
 ```
 
 > Example response:
 
 ```json
 {
-  "pk": 381,
+  "pk": 2,
   "name": "My Organization",
   "slug": "my-organization",
   "logo": null,
@@ -157,36 +154,45 @@ Get information for a specific Organization.
 ---------|-----------------
 **pk** | Organization ID.
 **name** | Organization name.
-**slug** | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**slug** | A human-readable unique identifier, used for storing Organization data.
 **logo** | Organization logo. This value is `null` if a custom logo has not been set.
 **created** | Timestamp of the Organization's create date.
 **updated** | Timestamp of the last update to the Organization
 
 ## PATCH /orgs/{Org ID}
 
-> Example Request
+> Example Request: Update the Organization name from the contents of a JSON file:
 
 ```shell
 curl -X PATCH \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
 -d @postorg.json \
-"https://api.stackpoint.io/orgs"
+"https://api.stackpoint.io/orgs/2"
 ```
 > Contents of `postorg.json`:
 
 ```json
 {
   "name": "New Organization Name",
-  "slug": "new-organization-name"
 }
+```
+
+> Alternate example: Update the Organization name as form data:
+
+```shell
+curl -X PATCH \
+-H "Content-Type: multipart/form-data" \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+-F name="New Organization Name" \
+"https://api.stackpoint.io/orgs/2"
 ```
 
 > Example Response
 
 ```json
 {
-  "pk": 15055,
+  "pk": 2,
   "name": "New Organization Name",
   "slug": "new-organization-name",
   "logo": null,
@@ -194,6 +200,30 @@ curl -X PATCH \
   "updated": "2019-01-31T21:21:07.607210Z"
 }
 ```
+
+> Example request: Update the Organization logo as form data:
+
+```shell
+curl -X PATCH \
+-H "Content-Type: multipart/form-data" \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+-F logo=@/path/to/file.jpg \
+"https://api.stackpoint.io/orgs/2"
+```
+
+> Example response:
+
+```json
+{
+  "pk": 2,
+  "name": "New Organization Name",
+  "slug": "new-organization-name",
+  "logo": "https:\/\/stackpoint_production.s3.amazonaws.com\/organization_logos\/logo.jpg",
+  "created": "2016-08-05T14:35:53.161852Z",
+  "updated": "2019-02-07T16:25:37.224597Z"
+}
+```
+
 Update information for an existing Organization.
 
 **Path Parameter**
@@ -207,8 +237,7 @@ Update information for an existing Organization.
 **Name** | **Required** | **Description**
 ---------|--------------|----------------
 **name** | Yes | Organization name.
-**slug** | No | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
-**logo** | No | URL of the Organization logo. This value is `null` if a custom logo has not been set.
+**logo** | No | Organization logo. This value is `null` if a custom logo has not been set. To set a custom logo, send it as content type `multipart/form-data` as shown on the right.
 
 ### Return Values
 
@@ -216,7 +245,7 @@ Update information for an existing Organization.
 ---------|-----------------
 **pk** | Organization ID.
 **name** | Organization name.
-**slug** | A human-readable unique identifier, used for storing Organization data. The only allowed characters are the 26 US ANSI letters (upper or lowercase), numbers, dashes, and hyphens. 50 characters max. Example: `my-organization`.
+**slug** | A human-readable unique identifier, used for storing Organization data.
 **logo** | Organization logo. This value is `null` if a custom logo has not been set.
 **created** | Timestamp of the Organization's create date.
 **updated** | Timestamp of the last update to the Organization
