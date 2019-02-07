@@ -185,7 +185,7 @@ curl -X PATCH \
 -H "Content-Type: multipart/form-data" \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
 -F name="New Organization Name" \
-"https://api.stackpoint.io/orgs/{Org ID}"
+"https://api.stackpoint.io/orgs/381"
 ```
 
 > Example Response
@@ -208,7 +208,7 @@ curl -X PATCH \
 -H "Content-Type: multipart/form-data" \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
 -F logo=@/path/to/file.jpg \
-"https://api.stackpoint.io/orgs/{Org ID}"
+"https://api.stackpoint.io/orgs/381"
 ```
 
 > Example response:
