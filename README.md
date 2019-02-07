@@ -45,27 +45,3 @@ Each high level API resource should have its own file under:
 Then insert `_[resource_name].md` in the includes list in `index.html.md`.
 
 Changes appear on the local doc site on refresh.
-
-Push to master when done, no PR necessary.
-
-## Deploying Docs to quarter-master-frontend
-
-### Pre-requisite
-
-You need to have `quarter-master-frontend` checked out.
-
-    export QM_FE_PATH=/foo/bar/quarter-master-frontend
-
-First build the compressed version of the docs:
-
-    bundle exec middleman build --clean
-
-Remove the old compressed files:
-
-    rm -rf $QM_FE_PATH/docs
-
-Copy new doc files:
-
-    cp -R build $QM_FE_PATH/docs
-
-Now switch to FE directory, add the changes and make a PR/merge as usual.
