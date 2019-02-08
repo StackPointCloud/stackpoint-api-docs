@@ -215,7 +215,7 @@ Create a new Keyset for the specified organization. Each keyset contains one or 
 **Name** | **Type** | **Required** | **Description**
 ---------|----------|--------------|----------------
 **name** | string | Yes | The Keyset name. Must be unique within the Organization by category and entity.
-**category** | string | Yes | The Keyset category. Allowed values are: `provider`, `solution`, `storage`, `vcs`, `user_ssh`
+**category** | string | Yes | The Keyset category. Allowed values are: `provider`, `solution`, `storage`, `vcs`, or `user_ssh`
 **entity** | string | No | The entity to which the keyset applies. [See below for more details and allowed values](#keyset-details).
 **org** | integer | Yes | The Organization ID.
 **workspaces** | list of integers | No | A list of Workspace IDs within the Organization to which the Keyset applies. To enable Organization-wide access, leave this value empty.
@@ -234,39 +234,48 @@ NOTE: When creating a Keyset, the required number of Keys must be passed.
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-AKS | X | `X` | XXXX | XXXX
+`aks` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
+ | | `tenant` | string | Tenant ID
+ | | `pub` | string | Client ID
+  | | `pvt` | string | Client Password   
 `aws` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
- | | `pvt` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Secret Access Key</a>
+ | | `pvt` | string | Secret Access Key
 `azure` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
   | | `tenant` | string | Tenant ID
   | | `pub` | string | Client ID
   | | `pvt` | string | Client Secret
 `do` | 1 | `token` | string | API Token
-EKS | X | `X` | XXXX | XXXX
+`eks` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
+ | | `pvt` | string | Secret Access Key
 `gce` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gce.html">Service Account JSON</a>
 `gke` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gke.html">Service Account JSON</a>
-Packet | X | `X` | XXXX | XXXX
-ProfitBricks | `X` | XXXX | XXXX
-1&1 | X | `X` | XXXX | XXXX
+`oneandone` | 1 | `token` | string | API Token
+`packet` | 1 | `token` | string | API Key
+`profitbricks` | 2 | `username` | string (email) | ProfitBricks username
+ | | `password` | string | Password
+
 
 **Solutions**
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-NetApp Cloud Volumes for AWS | X | `X` | XXXX | XXXX
+`cvsaws` | 2 | `pub` | string | API Key
+ | | `pvt` | string | Secret Key
 `sysdig` | 1 | `token` | string | Sysdig Cloud Access Key
-Tectonic | X | `X` | XXXX | XXXX
+`tectonic` | 2 | `license` | string | Universal Software License
+ | | `pull_secret` | string | Pull Secret
 `turbonomic` | 4 | `url` | string | Turbonomic Instance URL
  | | `username` | string | Username
  | | `password` | string | Password
  | | `scope` | string | Value must be `external`
-Twistlock | X | `X` | XXXX | XXXX
+`twistlock` | 1 | `license` | string | License
 
 **Storage**
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-XX | XX | XX | XX | XX
+`azure-storage` | 2 | XX | XX | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
+ | | XX | Access Key
 
 **VCS**
 
@@ -359,7 +368,7 @@ Update information for an existing Keyset.
 **Name** | **Type** | **Required** | **Description**
 ---------|----------|--------------|----------------
 **name** | string | Yes | The Keyset name. Must be unique within the Organization by category and entity.
-**category** | string | Yes | The Keyset category. Allowed values are: `provider`, `solution`, `storage`, `vcs`, `user_ssh`
+**category** | string | Yes | The Keyset category. Allowed values are: `provider`, `solution`, `storage`, `vcs`, or `user_ssh`
 **entity** | string | No | The entity to which the keyset applies. [See below for more details and allowed values](#keyset-details).
 **org** | integer | Yes | The Organization ID.
 **workspaces** | list of integers | No | A list of Workspace IDs within the Organization to which the Keyset applies. To enable Organization-wide access, leave this value empty.
@@ -378,40 +387,48 @@ NOTE: When creating a Keyset, the required number of Keys must be passed.
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-AKS | X | `X` | XXXX | XXXX
+`aks` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
+ | | `tenant` | string | Tenant ID
+ | | `pub` | string | Client ID
+  | | `pvt` | string | Client Password   
 `aws` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
- | | `pvt` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Secret Access Key</a>
+ | | `pvt` | string | Secret Access Key
 `azure` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
   | | `tenant` | string | Tenant ID
   | | `pub` | string | Client ID
   | | `pvt` | string | Client Secret
 `do` | 1 | `token` | string | API Token
-EKS | X | `X` | XXXX | XXXX
+`eks` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
+ | | `pvt` | string | Secret Access Key
 `gce` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gce.html">Service Account JSON</a>
 `gke` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gke.html">Service Account JSON</a>
-Packet | X | `X` | XXXX | XXXX
-ProfitBricks | `X` | XXXX | XXXX
-1&1 | X | `X` | XXXX | XXXX
+`oneandone` | 1 | `token` | string | API Token
+`packet` | 1 | `token` | string | API Key
+`profitbricks` | 2 | `username` | string (email) | ProfitBricks username
+ | | `password` | string | Password
+
 
 **Solutions**
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-NetApp Cloud Volumes for AWS | X | `X` | XXXX | XXXX
+`cvsaws` | 2 | `pub` | string | API Key
+ | | `pvt` | string | Secret Key
 `sysdig` | 1 | `token` | string | Sysdig Cloud Access Key
-Tectonic | X | `X` | XXXX | XXXX
+`tectonic` | 2 | `license` | string | Universal Software License
+ | | `pull_secret` | string | Pull Secret
 `turbonomic` | 4 | `url` | string | Turbonomic Instance URL
  | | `username` | string | Username
  | | `password` | string | Password
  | | `scope` | string | Value must be `external`
-Twistlock | X | `X` | XXXX | XXXX
+`twistlock` | 1 | `license` | string | License
 
 **Storage**
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-XX | XX | XX |
- XX | XX
+`azure-storage` | 2 | XX | XX | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
+ | | XX | Access Key
 
 **VCS**
 
