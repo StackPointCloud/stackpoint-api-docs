@@ -4,7 +4,11 @@ Keysets are credentials used by the system to provision clusters, add nodes, or 
 
 Keysets are scoped by organization.
 
-## GET /orgs/{Org ID}/keysets
+## GET All Keysets
+
+```shell
+GET https://api.stackpoint.io/orgs/{Org ID}/keysets
+```
 
 > Example request:
 
@@ -76,7 +80,11 @@ Get all of the Keysets belonging to the specified Organization. Each Keyset cont
 **fingerprint** | For SSH credentials: The RSA fingerprint.
 **created** | Timestamp of the Keyset's create date.
 
-## GET /orgs/{Org ID}/keysets/{Keyset ID}
+## GET A Specific Keyset
+
+```shell
+GET https://api.stackpoint.io/orgs/{Org ID}/keysets/{Keyset ID}
+```
 
 > Example request:
 
@@ -134,7 +142,11 @@ Get information for a specific Keyset.
 **fingerprint** | For SSH credentials: The RSA fingerprint.
 **created** | Timestamp of the Keyset's create date.
 
-## POST /orgs/{Org ID}/keysets
+## POST a New Keyset
+
+```shell
+POST https://api.stackpoint.io/orgs/{Org ID}/keysets
+```
 
 > Example request: Create an AWS Keyset
 
@@ -289,7 +301,11 @@ XX | XX | XX | XX | XX
 ---------- | ------------------ | ------------ | ------------- | ---------------
 1 | `pub` | string | SSH Public key
 
-## PATCH /orgs/{Org ID}/keysets/{Keyset ID}
+## PATCH Update a Keyset
+
+```shell
+PATCH https://api.stackpoint.io/orgs/{Org ID}/keysets/{Keyset ID}
+```
 
 > Example request: Update an AWS Keyset name using a JSON file
 
@@ -442,7 +458,11 @@ XX | XX | XX | XX | XX
 ---------- | ------------------ | ------------ | ------------- | ---------------
 1 | `pub` | string | SSH Public key
 
-## DELETE /orgs/{Org ID}/keysets/{Keyset ID}
+## DELETE a Keyset
+
+```shell
+DELETE https://api.stackpoint.io/orgs/{Org ID}/keysets/{Keyset ID}
+```
 
 > Example: Delete Keyset ID 3
 
