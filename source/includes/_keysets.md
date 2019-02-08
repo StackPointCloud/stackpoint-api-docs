@@ -1,8 +1,8 @@
 # Keysets
 
-Keysets are credentials used by the system to provision clusters, add nodes, or install applications.
+Keysets are credentials used by the system to provision clusters, add nodes, or install applications. Keysets are scoped by organization.
 
-Keysets are scoped by organization.
+<aside class="notice">For VCS keysets, only GET and DELETE are allowed through the API. To create or modify VCS credentials, you will need to use the UI.</aside>
 
 ## GET All Keysets
 
@@ -68,7 +68,7 @@ Get all of the Keysets belonging to the specified Organization. Each Keyset cont
 ---------|-----------------
 **pk** | Keyset ID.
 **name** | Credential name.
-**category** | Keyset category. Options include `provider`, `solution`, `storage`, `VCS`, and `SSH`.
+**category** | Keyset category. Options include `provider`, `solution`, `storage`, `vcs`, and `user_ssh`.
 **entity** | Provider name.
 **org** | Organization ID.
 **workspaces** | The workspace(s) to which the credential is assigned.
@@ -130,7 +130,7 @@ Get information for a specific Keyset.
 ---------|-----------------
 **pk** | Keyset ID.
 **name** | Credential name.
-**category** | Keyset category. Options include `provider`, `solution`, `storage`, `VCS`, and `SSH`.
+**category** | Keyset category. Options include `provider`, `solution`, `storage`, `vcs`, and `user_ssh`.
 **entity** | The entity to which the Keyset belongs.
 **org** | Organization ID.
 **workspaces** | The workspace(s) to which the credential is assigned.
@@ -227,7 +227,7 @@ Create a new Keyset for the specified organization. Each keyset contains one or 
 **Name** | **Type** | **Required** | **Description**
 ---------|----------|--------------|----------------
 **name** | string | Yes | The Keyset name. Must be unique within the Organization by category and entity.
-**category** | string | Yes | The Keyset category. Allowed values are: `provider`, `solution`, `storage`, `vcs`, or `user_ssh`
+**category** | string | Yes | The Keyset category. Allowed values are: `provider`, `solution`, `storage`, or `user_ssh`
 **entity** | string | No | The entity to which the keyset applies. [See below for more details and allowed values](#keyset-details).
 **org** | integer | Yes | The Organization ID.
 **workspaces** | list of integers | No | A list of Workspace IDs within the Organization to which the Keyset applies. To enable Organization-wide access, leave this value empty.
@@ -286,14 +286,8 @@ NOTE: When creating a Keyset, the required number of Keys must be passed.
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-`azure-storage` | 2 | XX | XX | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
- | | XX | Access Key
-
-**VCS**
-
-**Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
----------- | ------------------ | ------------ | ------------- | ---------------
-XX | XX | XX | XX | XX
+`azure-storage` | 2 | `other` | string | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
+ | | `access_key` | Access Key
 
 **User SSH**
 
@@ -384,7 +378,7 @@ Update information for an existing Keyset.
 **Name** | **Type** | **Required** | **Description**
 ---------|----------|--------------|----------------
 **name** | string | Yes | The Keyset name. Must be unique within the Organization by category and entity.
-**category** | string | Yes | The Keyset category. Allowed values are: `provider`, `solution`, `storage`, `vcs`, or `user_ssh`
+**category** | string | Yes | The Keyset category. Allowed values are: `provider`, `solution`, `storage`, or `user_ssh`
 **entity** | string | No | The entity to which the keyset applies. [See below for more details and allowed values](#keyset-details).
 **org** | integer | Yes | The Organization ID.
 **workspaces** | list of integers | No | A list of Workspace IDs within the Organization to which the Keyset applies. To enable Organization-wide access, leave this value empty.
@@ -443,14 +437,8 @@ NOTE: When creating a Keyset, the required number of Keys must be passed.
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-`azure-storage` | 2 | XX | XX | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
- | | XX | Access Key
-
-**VCS**
-
-**Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
----------- | ------------------ | ------------ | ------------- | ---------------
-XX | XX | XX | XX | XX
+`azure-storage` | 2 | `other` | string | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
+ | | `access_key` | Access Key
 
 **User SSH**
 
