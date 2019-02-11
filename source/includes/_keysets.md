@@ -2,7 +2,9 @@
 
 Keysets are credentials used by the system to provision clusters, add nodes, or install applications. Keysets are scoped by organization.
 
-<aside class="notice">For VCS keysets, only GET and DELETE are allowed through the API. To create or modify VCS credentials, you will need to use the UI.</aside> 
+<aside class="warning">Only an organization Owner or Admin can create, update, or delete Keysets.</aside>
+
+<aside class="notice">For VCS keysets, only GET and DELETE are allowed through the API. To create or modify VCS credentials, you will need to use the UI.</aside>
 
 ## GET All Keysets
 
@@ -274,13 +276,10 @@ NOTE: When creating a Keyset, the required number of Keys must be passed.
 `cvsaws` | 2 | `pub` | string | API Key
  | | `pvt` | string | Secret Key
 `sysdig` | 1 | `token` | string | Sysdig Cloud Access Key
-`tectonic` | 2 | `license` | string | Universal Software License
- | | `pull_secret` | string | Pull Secret
 `turbonomic` | 4 | `url` | string | Turbonomic Instance URL
  | | `username` | string | Username
  | | `password` | string | Password
  | | `scope` | string | Value must be `external`
-`twistlock` | 1 | `license` | string | License
 
 **Storage**
 
@@ -366,6 +365,8 @@ curl -X PATCH \
 
 Update information for an existing Keyset.
 
+<aside class="notice">The PATCH method allows you to update the Workspace(s) for a Keyset. To activate Workspace restrictions for the Keyset, pass the Workspace ID(s) in the `workspaces` array. To make the Keyset available for the entire Organization, delete the Workspace ID(s).</aside>
+
 **Path Parameter**
 
 **Name** | **Required** | **Description**
@@ -425,13 +426,10 @@ NOTE: When creating a Keyset, the required number of Keys must be passed.
 `cvsaws` | 2 | `pub` | string | API Key
  | | `pvt` | string | Secret Key
 `sysdig` | 1 | `token` | string | Sysdig Cloud Access Key
-`tectonic` | 2 | `license` | string | Universal Software License
- | | `pull_secret` | string | Pull Secret
 `turbonomic` | 4 | `url` | string | Turbonomic Instance URL
  | | `username` | string | Username
  | | `password` | string | Password
  | | `scope` | string | Value must be `external`
-`twistlock` | 1 | `license` | string | License
 
 **Storage**
 
