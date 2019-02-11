@@ -2,7 +2,7 @@
 
 Keysets are credentials used by the system to provision clusters, add nodes, or install applications. Keysets are scoped by organization.
 
-<aside class="notice">For VCS keysets, only GET and DELETE are allowed through the API. To create or modify VCS credentials, you will need to use the UI.</aside>
+<aside class="notice">For VCS keysets, only GET and DELETE are allowed through the API. To create or modify VCS credentials, you will need to use the UI.</aside> 
 
 ## GET All Keysets
 
