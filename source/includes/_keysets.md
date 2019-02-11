@@ -1,205 +1,164 @@
 # Keysets
 
-Keysets are credentials used by the system to provision clusters, add nodes or install applications.
+Keysets are credentials used by the system to provision clusters, add nodes, or install applications. Keysets are scoped by organization.
 
-Keysets are scoped by organization.
+<aside class="notice">For VCS keysets, only GET and DELETE are allowed through the API. To create or modify VCS credentials, you will need to use the UI.</aside> 
 
-## Get All Keysets
+## GET All Keysets
 
 ```shell
-curl "https://api.stackpoint.io/orgs/<ORG_ID>/keysets"
-  -H "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5"
+GET https://api.stackpoint.io/orgs/{Org ID}/keysets
 ```
 
-> The above command returns JSON structured like this:
+> Example request:
+
+```shell
+curl -X GET \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+"https://api.stackpoint.io/orgs/2/keysets"
+```
+
+> Example response:
 
 ```json
 [
   {
-    "pk": 25,
-    "name": "My DO Keyset",
-    "category": "provider",
-    "entity": "do",
-    "org": 1,
-    "workspaces": [],
-    "user": 1,
-    "is_default": false,
-    "keys": [
-      {
-        "pk": 30,
-        "keyset": 25,
-        "key_type": "token",
-        "fingerprint": "",
-        "user": 1
-      }
-    ],
-    "created": "2016-08-16T23:22:53.490803Z"
-  },
-  {
-    "pk": 26,
-    "name": "My AWS Keyset",
+    "pk": 1,
+    "name": "My AWS Credentials",
     "category": "provider",
     "entity": "aws",
-    "org": 1,
-    "workspaces": [],
+    "org": 2,
+    "workspaces": [
+
+    ],
     "user": 1,
     "is_default": false,
     "keys": [
       {
-        "pk": 31,
-        "keyset": 26,
+        "pk": 2,
+        "keyset": 1,
         "key_type": "pub",
         "fingerprint": "",
         "user": 1
       },
       {
-        "pk": 32,
-        "keyset": 26,
+        "pk": 3,
+        "keyset": 2,
         "key_type": "pvt",
         "fingerprint": "",
         "user": 1
       }
     ],
-    "created": "2016-08-16T23:22:53.490803Z"
+    "created": "2018-11-14T22:03:02.892559Z"
   }
 ]
 ```
 
-This endpoint retrieves all keysets available to under a specific organization.
+Get all of the Keysets belonging to the specified Organization. Each Keyset contains one or more Keys.
 
-The `pk` attribute in the response denotes the keyset ID.
+**Path Parameter**
 
-### HTTP Request
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
 
-`GET https://api.stackpoint.io/orgs/<ORG_ID>/keysets`
+### Return Values
 
-### URL Parameters
+**Name** | **Description**
+---------|-----------------
+**pk** | Keyset ID.
+**name** | Credential name.
+**category** | Keyset category. Options include `provider`, `solution`, `storage`, `vcs`, and `user_ssh`.
+**entity** | Provider name.
+**org** | Organization ID.
+**workspaces** | The workspace(s) to which the credential is assigned.
+**user** | The user to whom the credential is assigned.
+**is_default** | Whether the credential is set as "Default" or not.
+**keys** | Credentials contained in the keyset.
+**keyset** | The Keyset ID to which the credential belongs.
+**key_type** | The type of Key.
+**fingerprint** | For SSH credentials: The RSA fingerprint.
+**created** | Timestamp of the Keyset's create date.
 
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
-
-## Get a Specific Keyset
+## GET A Specific Keyset
 
 ```shell
-curl "https://api.stackpoint.io/orgs/1/keysets/25"
-  -H "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5"
+GET https://api.stackpoint.io/orgs/{Org ID}/keysets/{Keyset ID}
 ```
 
-> The above command returns JSON structured like this:
+> Example request:
+
+```shell
+curl -X GET \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+"https://api.stackpoint.io/orgs/2/keysets/3"
+```
+
+> Example response:
 
 ```json
 {
-  "pk": 25,
-  "name": "My DO Keyset",
+  "pk": 3,
+  "name": "JDoe AWS Credentials",
   "category": "provider",
-  "entity": "do",
-  "org": 1,
-  "workspaces": [],
-  "user": 1,
+  "entity": "",
+  "org": 2,
+  "workspaces": [
+
+  ],
+  "user": 3,
   "is_default": false,
   "keys": [
-    {
-      "pk": 30,
-      "keyset": 25,
-      "key_type": "token",
-      "fingerprint": "",
-      "user": 1
-    }
+
   ],
-  "created": "2016-08-16T23:22:53.490803Z"
+  "created": "2019-02-06T17:32:05.802960Z"
 }
 ```
 
-This endpoint retrieves a specific keyset.
+Get information for a specific Keyset.
 
-### HTTP Request
+**Path Parameters**
 
-`GET https://api.stackpoint.io/orgs/<ORG_ID>/keysets/<ID>`
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Keyset ID** | Yes | The Keyset ID
 
-### URL Parameters
+### Return Values
 
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
-ID | ID of the keyset
+**Name** | **Description**
+---------|-----------------
+**pk** | Keyset ID.
+**name** | Credential name.
+**category** | Keyset category. Options include `provider`, `solution`, `storage`, `vcs`, and `user_ssh`.
+**entity** | The entity to which the Keyset belongs.
+**org** | Organization ID.
+**workspaces** | The workspace(s) to which the credential is assigned.
+**user** | The user to whom the credential is assigned.
+**is_default** | Whether the credential is set as "Default" or not.
+**keys** | Credentials contained in the keyset.
+**keyset** | The Keyset ID to which the credential belongs.
+**key_type** | The type of Key.
+**fingerprint** | For SSH credentials: The RSA fingerprint.
+**created** | Timestamp of the Keyset's create date.
 
-## Create a Keyset
-
-There are 3 categories of keysets that can be created using the API.
-
-1. Provider keysets
-2. Solution keysets
-3. SSH Keyset
-
-Each keyset contains one or more Keys.
-
-### Request Data Attributes
-
-#### Keyset Attributes
-
-Parameter | Type | Description
---------- | ---- | -----------
-name | string | Name of the keyset, must be unique by category and entity within an organization
-category | string | Category of keyset. Options are: `provider`, `solution`, `user_ssh`
-entity | string | Specific entity the keyset applies to, differs by category:
- | | For `provider` category the options are: AWS: `aws`, Azure: `azure`, DigitalOcean: `do`, GCE: `gce`, GKE: `gke`
- | | For `solution` category the options are: Sysdig Cloud: `sysdig`, Turbonomic: `turbonomic`
- | | For `user_ssh` category leave this value empty
-workspaces | list of integer | A list of IDs for workspaces within the organization to which the keyset will be restricted to. Leave empty to allow organization wide access
-keys | list of objects | A list of keys to attach to keyset
-
-#### Key Attributes
-
-Parameter | Type | Description
---------- | ---- | -----------
-key_type | string | Type of key. Varies by keyset category and entity
-key | string | Value stored in the key. Encrypted before storing to DB. Value not returned in GET requests
-
-#### List of Key Types and Keys for Providers
-
-When creating a keyset the required # of keys must be passed.
-
-Entity | # of Keys | Key Type | Data Type | Key
------- | --------- | -------- | --------- | ---
-`aws` | 2 | `pub` | string | <a href="https://stackpointcloud.com/community/tutorial/how-to-create-auth-credentials-on-amazon-web-services-aws" target="_blank">Access Key ID</a>
- | | `pvt` | string | Secret Access Key
-`azure` | 4 | `subscription` | string | <a href="https://stackpointcloud.com/community/tutorial/how-to-create-auth-credentials-on-azure" target="_blank">Subscription ID</a>
- | | `tenant` | string | Tenant ID
- | | `pub` | string | Client ID
- | | `pvt` | string | Client Secret
-`do` | 1 | `token` | string | API Token
-`gce` | 1 | `other` | string | <a href="https://stackpointcloud.com/community/tutorial/google-compute-engine-setup-and-authentication" target="_blank">Service Account JSON</a>
-`gke` | 1 | `other` | string | <a href="https://stackpointcloud.com/community/tutorial/how-to-create-auth-credentials-on-google-container-engine-gke" target="_blank">Service Account JSON</a>
-
-#### List of Key Types and Keys for Solutions
-
-Entity | # of Keys | Key Type | Data Type | Key
------- | --------- | -------- | --------- | ---
-`sysdig` | 1 | `token` | string | Sysdig Cloud Access Key
-`turbonomic` | 4 | `url` | string | Turbonomic Instance URL
- | | `username` | string | Username
- | | `password` | string | Password
- | | `scope` | string | Value must be `external`
-
-#### List of Key Types and Keys for SSH
-\# of Keys | Key Type | Data Type | Key
---------- | -------- | --------- | ---
-1 | `pub` | string | SSH Public key
-
-
-## Create AWS Keyset
+## POST a New Keyset
 
 ```shell
-curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
-     --header "Content-Type: application/json" \
-     --header "Accept: application/json" \
-     --request POST \
-     --data @create_aws_keyset.json \
-     https://api.stackpoint.io/orgs/1/keysets
+POST https://api.stackpoint.io/orgs/{Org ID}/keysets
 ```
 
-> `create_aws_keyset.json` should contain the following data:
+> Example request: Create an AWS Keyset
+
+```shell
+curl -X POST \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+-H "Content-Type: application/json" \
+-d @create-aws-keyset.json \
+"https://api.stackpoint.io/orgs/1/keysets"
+```
+
+> Contents of `create-aws-keyset.json`:
 
 ```json
 {
@@ -210,46 +169,306 @@ curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
   "keys": [
     {
       "key_type": "pub",
-      "key": "AKIAIXH7J9KGB56VWZGA"
+      "key": "123456789aBcDeF"
     },
     {
       "key_type": "pvt",
-      "key": "FfgssHsds9u3rfsjOHDsssy8w3ehdsokFDDrR"
+      "key": "aBcDeF123456789"
     }
   ]
 }
+
 ```
 
-Create an AWS keyset by sending the appropriate keys.
+> Example response:
 
-### HTTP Request
+```json
+{
+  "pk": 45675,
+  "name": "My AWS Keyset",
+  "category": "provider",
+  "entity": "aws",
+  "org": 2,
+  "workspaces": [
 
-`POST https://api.stackpoint.io/orgs/<ORG_ID>/keysets`
+  ],
+  "user": 2,
+  "is_default": false,
+  "keys": [
+    {
+      "pk": 3,
+      "keyset": 5,
+      "key_type": "pvt",
+      "fingerprint": "",
+      "user": 380
+    },
+    {
+      "pk": 4,
+      "keyset": 6,
+      "key_type": "pub",
+      "fingerprint": "",
+      "user": 380
+    }
+  ],
+  "created": "2019-02-07T21:24:43.037968Z"
+}
+```
 
-### URL Parameters
+Create a new Keyset for the specified organization. Each keyset contains one or more Keys.
 
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
+**Path Parameter**
 
-## Delete a Keyset
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+
+### Keyset and Key Values
+
+**Name** | **Type** | **Required** | **Description**
+---------|----------|--------------|----------------
+**name** | string | Yes | The Keyset name. Must be unique within the Organization by category and entity.
+**category** | string | Yes | The Keyset category. Allowed values are: `provider`, `solution`, `storage`, or `user_ssh`
+**entity** | string | No | The entity to which the keyset applies. [See below for more details and allowed values](#keyset-details).
+**org** | integer | Yes | The Organization ID.
+**workspaces** | list of integers | No | A list of Workspace IDs within the Organization to which the Keyset applies. To enable Organization-wide access, leave this value empty.
+**user** | integer | No | The ID of the user to whom the key is assigned.
+**is_default** | string | No | Whether or not this is a default credential. Allowed values are `true` and `false`.
+**keys** | list of objects | Yes | A list of keys to attach to the Keyset.
+**key_type** | string | Yes | Type of key. Varies by keyset category and entity. [See below for more details and allowed values](#keyset-details).
+**key** | string | Yes | The content of the key. This value is encrypted before being stored to the database. This value is not returned in GET requests.
+
+### Keyset Details
+
+NOTE: When creating a Keyset, the required number of Keys must be passed.
+
+**Providers**
+
+
+**Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
+---------- | ------------------ | ------------ | ------------- | ---------------
+`aks` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
+ | | `tenant` | string | Tenant ID
+ | | `pub` | string | Client ID
+  | | `pvt` | string | Client Password   
+`aws` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
+ | | `pvt` | string | Secret Access Key
+`azure` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
+  | | `tenant` | string | Tenant ID
+  | | `pub` | string | Client ID
+  | | `pvt` | string | Client Secret
+`do` | 1 | `token` | string | API Token
+`eks` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
+ | | `pvt` | string | Secret Access Key
+`gce` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gce.html">Service Account JSON</a>
+`gke` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gke.html">Service Account JSON</a>
+`oneandone` | 1 | `token` | string | API Token
+`packet` | 1 | `token` | string | API Key
+`profitbricks` | 2 | `username` | string (email) | ProfitBricks username
+ | | `password` | string | Password
+
+
+**Solutions**
+
+**Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
+---------- | ------------------ | ------------ | ------------- | ---------------
+`cvsaws` | 2 | `pub` | string | API Key
+ | | `pvt` | string | Secret Key
+`sysdig` | 1 | `token` | string | Sysdig Cloud Access Key
+`tectonic` | 2 | `license` | string | Universal Software License
+ | | `pull_secret` | string | Pull Secret
+`turbonomic` | 4 | `url` | string | Turbonomic Instance URL
+ | | `username` | string | Username
+ | | `password` | string | Password
+ | | `scope` | string | Value must be `external`
+`twistlock` | 1 | `license` | string | License
+
+**Storage**
+
+**Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
+---------- | ------------------ | ------------ | ------------- | ---------------
+`azure-storage` | 2 | `other` | string | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
+ | | `access_key` | Access Key
+
+**User SSH**
+
+**Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
+---------- | ------------------ | ------------ | ------------- | ---------------
+1 | `pub` | string | SSH Public key
+
+## PATCH Update a Keyset
 
 ```shell
-curl -X DELETE "https://api.stackpoint.io/orgs/1/keysets/25"
-  -H "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5"
+PATCH https://api.stackpoint.io/orgs/{Org ID}/keysets/{Keyset ID}
 ```
 
-> The above command returns an empty response with status code `204`
+> Example request: Update an AWS Keyset name using a JSON file
 
-This endpoint deletes a specific keyset. All associated keys are removed.
+```shell
+curl -X PATCH \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+-H "Content-Type: application/json" \
+-d @rename-aws-keyset.json \
+"https://api.stackpoint.io/orgs/2/keysets/4"
+```
 
-### HTTP Request
+> Contents of `rename-aws-keyset.json`:
 
-`DELETE https://api.stackpoint.io/orgs/<ORG_ID>/keysets/<ID>`
+```json
+{
+  "name": "My Renamed AWS Keyset"
+}
 
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
-ID | ID of the keyset
+```
 
-<aside class="warning">If you remove a provider keyset that is associated with a running cluster, then you will no longer be able to add or remove nodes or delete the cluster cleanly.</aside>
+> Alternate example: Update an AWS Keyset name as form data:
+
+```shell
+curl -X PATCH \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+-H "Content-Type: multipart/form-data" \
+-F name="My Renamed AWS Keyset" \
+"https://api.stackpoint.io/orgs/2/keysets/4"
+```
+
+> Example response:
+
+```json
+{
+  "pk": 4,
+  "name": "My Renamed AWS Keyset2",
+  "category": "provider",
+  "entity": "aws",
+  "org": 2,
+  "workspaces": [
+
+  ],
+  "user": 3,
+  "is_default": false,
+  "keys": [
+    {
+      "pk": 5,
+      "keyset": 4,
+      "key_type": "pub",
+      "fingerprint": "",
+      "user": 3
+    },
+    {
+      "pk": 6,
+      "keyset": 4,
+      "key_type": "pvt",
+      "fingerprint": "",
+      "user": 3
+    }
+  ],
+  "created": "2019-02-07T21:40:50.675410Z"
+}
+```
+
+Update information for an existing Keyset.
+
+**Path Parameter**
+
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Keyset ID** | Yes | The Keyset ID
+
+### Keyset and Key Values
+
+**Name** | **Type** | **Required** | **Description**
+---------|----------|--------------|----------------
+**name** | string | Yes | The Keyset name. Must be unique within the Organization by category and entity.
+**category** | string | Yes | The Keyset category. Allowed values are: `provider`, `solution`, `storage`, or `user_ssh`
+**entity** | string | No | The entity to which the keyset applies. [See below for more details and allowed values](#keyset-details).
+**org** | integer | Yes | The Organization ID.
+**workspaces** | list of integers | No | A list of Workspace IDs within the Organization to which the Keyset applies. To enable Organization-wide access, leave this value empty.
+**user** | integer | No | The ID of the user to whom the key is assigned.
+**is_default** | string | No | Whether or not this is a default credential. Allowed values are `true` and `false`.
+**keys** | list of objects | Yes | A list of keys to attach to the Keyset.
+**key_type** | string | Yes | Type of key. Varies by keyset category and entity. [See below for more details and allowed values](#keyset-details).
+**key** | string | Yes | The content of the key. This value is encrypted before being stored to the database. This value is not returned in GET requests.
+
+### Keyset Details
+
+NOTE: When creating a Keyset, the required number of Keys must be passed.
+
+**Providers**
+
+
+**Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
+---------- | ------------------ | ------------ | ------------- | ---------------
+`aks` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
+ | | `tenant` | string | Tenant ID
+ | | `pub` | string | Client ID
+  | | `pvt` | string | Client Password   
+`aws` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
+ | | `pvt` | string | Secret Access Key
+`azure` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
+  | | `tenant` | string | Tenant ID
+  | | `pub` | string | Client ID
+  | | `pvt` | string | Client Secret
+`do` | 1 | `token` | string | API Token
+`eks` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
+ | | `pvt` | string | Secret Access Key
+`gce` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gce.html">Service Account JSON</a>
+`gke` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gke.html">Service Account JSON</a>
+`oneandone` | 1 | `token` | string | API Token
+`packet` | 1 | `token` | string | API Key
+`profitbricks` | 2 | `username` | string (email) | ProfitBricks username
+ | | `password` | string | Password
+
+
+**Solutions**
+
+**Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
+---------- | ------------------ | ------------ | ------------- | ---------------
+`cvsaws` | 2 | `pub` | string | API Key
+ | | `pvt` | string | Secret Key
+`sysdig` | 1 | `token` | string | Sysdig Cloud Access Key
+`tectonic` | 2 | `license` | string | Universal Software License
+ | | `pull_secret` | string | Pull Secret
+`turbonomic` | 4 | `url` | string | Turbonomic Instance URL
+ | | `username` | string | Username
+ | | `password` | string | Password
+ | | `scope` | string | Value must be `external`
+`twistlock` | 1 | `license` | string | License
+
+**Storage**
+
+**Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
+---------- | ------------------ | ------------ | ------------- | ---------------
+`azure-storage` | 2 | `other` | string | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
+ | | `access_key` | Access Key
+
+**User SSH**
+
+**Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
+---------- | ------------------ | ------------ | ------------- | ---------------
+1 | `pub` | string | SSH Public key
+
+## DELETE a Keyset
+
+```shell
+DELETE https://api.stackpoint.io/orgs/{Org ID}/keysets/{Keyset ID}
+```
+
+> Example: Delete Keyset ID 3
+
+```shell
+curl -X DELETE \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+"https://api.stackpoint.io/orgs/2/keysets/3"
+```
+
+> A successful DELETE returns an empty response with status code `204`
+
+Delete the specified Keyset. All associated keys are removed.
+
+**Path Parameter**
+
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Keyset ID** | Yes | The Keyset ID
+
+<aside class="warning">If you delete a keyset associated with a running cluster, you will not be able to add or remove nodes or delete the cluster cleanly.</aside>
