@@ -1,188 +1,324 @@
-# NodePools
+# Node Pools
 
 Node pools are used to manage worker nodes with common properties.
 
 Each cluster gets a default node pool when it is created. Master nodes are stand-alone and do not belong to pools.
 
-## Get All Nodepools of a Cluster
+## GET All of a Cluster's Node Pools
 
 ```shell
-curl "https://api.stackpoint.io/orgs/4/clusters/12/nodepools"
-  -H "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5"
+GET "https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/nodepools"
 ```
 
-> The above command returns JSON structured like this:
+> Example query:
+
+```shell
+curl -X GET \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+https://api.stackpoint.io/orgs/3/clusters/2/nodepools
+```
+
+> Example response:
 
 ```json
 [
-    {
-        "pk": 37,
-        "cluster": 12,
-        "name": "Default Worker Pool",
-        "instance_id": "spca44o3iw-pool-1",
-        "instance_size": "2gb",
-        "platform": "coreos",
-        "channel": "stable",
-        "zone": "nyc1",
-        "provider_subnet_id": "",
-        "provider_subnet_cidr": "",
-        "node_count": 2,
-        "role": "worker",
-        "state": "active",
-        "is_default": true,
-        "created": "2017-12-06T02:22:21.767822Z",
-        "updated": "2017-12-06T02:22:21.797813Z"
-    },
-    {
-        "pk": 38,
-        "cluster": 12,
-        "name": "High Memory Pool",
-        "instance_id": "spca44o3iw-pool-1",
-        "instance_size": "4gb",
-        "platform": "coreos",
-        "channel": "stable",
-        "zone": "nyc1",
-        "provider_subnet_id": "",
-        "provider_subnet_cidr": "",
-        "node_count": 4,
-        "role": "worker",
-        "state": "active",
-        "is_default": false,
-        "created": "2017-12-06T02:22:21.767822Z",
-        "updated": "2017-12-06T02:22:21.797813Z"
-    }
-]
-```
-
-This endpoint retrieves all transitioning or running nodes under a given cluster.
-
-### HTTP Request
-
-`GET https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<CLUSTER_ID>/nodepools`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
-CLUSTER_ID | ID of the cluster
-
-## Get a Specific Nodepool
-
-```shell
-curl "https://api.stackpoint.io/orgs/4/clusters/12/nodepools/37"
-  -H "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-    "pk": 37,
-    "cluster": 12,
+  {
+    "pk": 2,
+    "cluster": 2,
     "name": "Default Worker Pool",
-    "instance_id": "spca44o3iw-pool-1",
-    "instance_size": "2gb",
+    "instance_id": "spc8brwf3x-pool-1",
+    "instance_size": "t2.large",
     "platform": "coreos",
     "channel": "stable",
-    "zone": "nyc1",
-    "provider_subnet_id": "",
-    "provider_subnet_cidr": "",
+    "root_disk_size": 50,
+    "zone": "us-west-2a",
+    "provider_subnet_id": "subnet-d19044b6",
+    "provider_subnet_cidr": "172.22.4.0\/24",
     "node_count": 2,
+    "autoscaled": false,
+    "min_count": 0,
+    "max_count": 0,
+    "network_components": [
+
+    ],
+    "gpu_instance_size": "",
+    "gpu_core_count": null,
+    "labels": "",
     "role": "worker",
     "state": "active",
     "is_default": true,
-    "created": "2017-12-06T02:22:21.767822Z",
-    "updated": "2017-12-06T02:22:21.797813Z"
-}
+    "config": {
+
+    },
+    "created": "2019-02-15T16:28:01.307143Z",
+    "updated": "2019-02-15T16:28:02.022251Z"
+  }
+]
 ```
+Get all the transitioning or running nodes for the specified cluster.
 
-This endpoint retrieves all transitioning or running nodes under a given cluster.
+**Path Parameter**
 
-### HTTP Request
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Cluster ID** | Yes | The Cluster ID.
 
-`GET https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<CLUSTER_ID>/nodepools/<ID>`
+### Return Values
 
-### URL Parameters
+**Name** | **Description**
+---------|-----------------
+**pk** | Node pool ID.
+**cluster** | Cluster ID.
+**name** | Node pool name.
+**instance_id** | Instance name.
+**instance_size** | Instance size for the nodes. Consult provider documentation for available instance sizes.
+**platform** | The node's operating system.
+**channel** | The cluster's OS distribution version.
+**root_disk_size** | Size of the root disk.
+**zone** | The AWS provider zone. Valid only for master nodes on AWS.
+**provider_subnet_id** | ID of the subnet where the node has been added. Valid only for master nodes on AWS.
+**provider_subnet_cidr** | The subnet CIDR. Valid only for master nodes on AWS.
+**node_count** | Number of nodes.
+**autoscaled** | Whether or not autoscaling is enabled.
+**min_count** | If autoscaling is enabled, the minimum number of nodes to maintain in the pool. If autoscale is not enabled, this value is `0`.
+**max_count** | If autoscaling is enabled, the maximum number of nodes to maintain in the pool. If autoscale is not enabled, this value is `0`.
+**network_components** | A list of network components.
 
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
-CLUSTER_ID | ID of the cluster
-ID | ID of the node pool
+### Network Component Attributes
 
-## Create a Nodepool
+**Name** | **Description**
+---------|-----------------
+**gpu_instance_size** | Size of the GPU instance.
+**gpu_core_count** | Number of GPU cores.
+**labels** | Label(s) assigned to the network component.
+**role** | The network component's role.
+**state** | The network component's state.
+**is_default** | Whether or not this is a default network component.
+**config** | Any additional configurations.
 
-### Request Data Attributes
 
-Parameter | Type | Description
---------- | ---- | -----------
-name | string | Name of the nodepool
-instance_size | string | Instance size for the nodes. Consult provider documentation for available instance sizes.
-node_count | integer | Number of nodes to add
-platform | string | Linux distribution to use. Options are:
- | | AWS: `coreos`, `ubuntu`
- | | Azure: `coreos`, `ubuntu`
- | | DigitalOcean: `coreos`, `ubuntu`
- | | GCE: `coreos`, `ubuntu`
- | | GKE: `gci` (send gci for "cos" as well)
-zone | string | The zone where the node should be added. Valid only for master nodes on AWS
-provider_subnet_id | string | ID of Subnet where node should be added. Valid only for master nodes on AWS
-provider_subnet_cidr | string | Subnet CIDR. Valid only for master nodes on AWS
-
-## Create a GCE Nodepool
+## GET a Specific Node Pool
 
 ```shell
-curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
-     --header "Content-Type: application/json" \
-     --header "Accept: application/json" \
-     --request POST \
-     --data @add_node_pool.json \
-     https://api.stackpoint.io/orgs/1/clusters/12/nodepools
+GET "https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/nodepools/{Node Pool ID}"
 ```
 
-> `add_node_pool.json` should contain the following data:
+> Example query:
+
+```shell
+curl -X GET \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+https://api.stackpoint.io/orgs/3/clusters/2/nodepools/2
+```
+
+> Example response:
+
+```json
+[
+  {
+    "pk": 2,
+    "cluster": 2,
+    "name": "Default Worker Pool",
+    "instance_id": "spc8brwf3x-pool-1",
+    "instance_size": "t2.large",
+    "platform": "coreos",
+    "channel": "stable",
+    "root_disk_size": 50,
+    "zone": "us-west-2a",
+    "provider_subnet_id": "subnet-d19044b6",
+    "provider_subnet_cidr": "172.22.4.0\/24",
+    "node_count": 2,
+    "autoscaled": false,
+    "min_count": 0,
+    "max_count": 0,
+    "network_components": [
+
+    ],
+    "gpu_instance_size": "",
+    "gpu_core_count": null,
+    "labels": "",
+    "role": "worker",
+    "state": "active",
+    "is_default": true,
+    "config": {
+
+    },
+    "created": "2019-02-15T16:28:01.307143Z",
+    "updated": "2019-02-15T16:28:02.022251Z"
+  }
+]
+```
+
+Get information for a specific node pool.
+
+**Path Parameter**
+
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Cluster ID** | Yes | The Cluster ID.
+**Node Pool ID** | Yes | The Node Pool ID.
+
+### Return Values
+
+**Name** | **Description**
+---------|-----------------
+**pk** | Node pool ID.
+**cluster** | Cluster ID.
+**name** | Node pool name.
+**instance_id** | Instance name.
+**instance_size** | Instance size for the nodes.
+**platform** | The node's operating system.
+**channel** | The cluster's OS distribution version.
+**root_disk_size** | Size of the root disk.
+**zone** | The AWS provider zone. Valid only for master nodes on AWS.
+**provider_subnet_id** | ID of the subnet where the node has been added. Valid only for master nodes on AWS.
+**provider_subnet_cidr** | The subnet CIDR. Valid only for master nodes on AWS.
+**node_count** | Number of nodes.
+**autoscaled** | Whether or not autoscaling is enabled.
+**min_count** | If autoscaling is enabled, the minimum number of nodes to maintain in the pool. If autoscale is not enabled, this value is `0`.
+**max_count** | If autoscaling is enabled, the maximum number of nodes to maintain in the pool. If autoscale is not enabled, this value is `0`.
+**network_components** | A list of network components.
+
+### Network Component Attributes
+
+**Name** | **Description**
+---------|-----------------
+**gpu_instance_size** | Size of the GPU instance.
+**gpu_core_count** | Number of GPU cores.
+**labels** | Label(s) assigned to the network component.
+**role** | The network component's role.
+**state** | The network component's state.
+**is_default** | Whether or not this is a default network component.
+**config** | Any additional configurations.
+
+
+## POST Create a Node Pool
+
+```shell
+POST "https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/nodepools"
+```
+
+Create a node pool for the specified cluster.
+
+**Path Parameters**
+
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Cluster ID** | Yes | The Cluster ID.
+
+### Node Pool Attributes
+
+**Name** | **Description**
+---------|-----------------
+**name** | string | Node pool name.
+**instance_size** | string | Instance size for the nodes. Consult provider documentation for available instance sizes.
+**platform** | string | Linux distribution to use. The allowed values are:
+ | | AWS: `coreos`, `ubuntu`
+ | | Azure: `coreos`, `ubuntu`
+ | | GCE: `coreos`, `ubuntu`
+ | | GKE: `gci` (send gci for "cos" as well)
+**channel** | string | Distribution version to use. Options are:
+ | | CoreOS: `stable`, `beta`, `alpha`
+ | | Ubuntu: `16.04-lts`
+ | | GCI: `stable`
+**root_disk_size** | Size of the root disk.
+**zone** | the zone where the node should be added. Valid only for master nodes on AWS.
+**provider_subnet_id** | ID of the subnet where the node has been added. Valid only for master nodes on AWS.
+**provider_subnet_cidr** | The subnet CIDR. Valid only for master nodes on AWS.
+**node_count** | integer | Number of nodes to add.
+
+## Example: Create a GCE Node Pool
+
+```shell
+POST "https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/nodepools"
+```
+
+> Example request:
+
+```shell
+curl -X POST \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d @add-node-pool.json \
+https://api.stackpoint.io/orgs/1/clusters/2/nodepools
+```
+
+> Contents of add-node-pool.json:
 
 ```json
 {
-    "name": "Awesome Node Pool",
+    "name": "My New Node Pool",
     "instance_size": "n1-standard-2",
     "node_count": 4,
     "platform": "coreos"
 }
 ```
+> Example response:
 
-This endpoint allows creating a new Nodepool resource.
+```json
+{
+  "pk": 4,
+  "cluster": 2,
+  "name": "My New Node Pool",
+  "instance_id": "spcqdcyiaf-pool-2",
+  "instance_size": "n1-standard-2",
+  "platform": "coreos",
+  "channel": "stable",
+  "root_disk_size": null,
+  "zone": "",
+  "provider_subnet_id": "",
+  "provider_subnet_cidr": "",
+  "node_count": 4,
+  "autoscaled": false,
+  "min_count": 0,
+  "max_count": 0,
+  "network_components": [
 
-### HTTP Request
+  ],
+  "gpu_instance_size": "",
+  "gpu_core_count": null,
+  "labels": "",
+  "role": "worker",
+  "state": "active",
+  "is_default": false,
+  "config": {
 
-`POST https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<CLUSTER_ID>/nodepools`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
-CLUSTER_ID | ID of the cluster
-
-## Autoscale a Nodepool
-
-To autoscale a nodepool, Autoscaler solution must be installed on the cluster.
-
-### Enable/update Autoscaling
-
-To enable or update autoscaling for a nodepool, set `autoscaled` to `true` and include `min_count` and `max_count`.
-
-```shell
-curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
-     --header "Content-Type: application/json" \
-     --header "Accept: application/json" \
-     --request POST \
-     --data @scale_node_pool.json \
-     https://api.stackpoint.io/orgs/1/clusters/12/nodepools
+  },
+  "created": "2019-02-15T17:59:24.893275Z",
+  "updated": "2019-02-15T17:59:24.923326Z"
+}
 ```
 
-> `scale_node_pool.json` should contain the following data:
+This example creates a new node pool with four nodes on an existing GCE cluster.
+
+**Path Parameters**
+
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Cluster ID** | Yes | The Cluster ID.
+
+## Example: Enable Autoscaling
+
+```shell
+POST "https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/nodepools/{Node Pool ID}"
+```
+
+> Example request:
+
+```shell
+curl -X POST \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d @enable-node-pool-autoscaling.json \
+https://api.stackpoint.io/orgs/1/clusters/2/nodepools/4
+```
+> Contents of enable-node-pool-autoscaling.json:
 
 ```json
 {
@@ -192,43 +328,45 @@ curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
 }
 ```
 
-### HTTP Request
+To enable or update autoscaling for a node pool, set `autoscaled` to `true` and include `min_count` and `max_count`.
 
-`POST https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<CLUSTER_ID>/nodepools/<ID>`
 
-### URL Parameters
+**Path Parameters**
 
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
-CLUSTER_ID | ID of the cluster
-ID | ID of the node pool
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Cluster ID** | Yes | The Cluster ID.
+**Node Pool ID** | Yes | The Node Pool ID.
 
-### Request Data Attributes
+### Autoscaling Attributes
 
-Parameter | Type | Description
+**Name** | **Type** | **Description**
 --------- | ---- | -----------
-autoscaled | boolean | Enable or disable autoscaling for node pool
-min_count | integer | Minimum number of nodes to maintain in the pool, 0 or greater
-max_count | integer | Maximum number of nodes to maintain in the pool, must be equal to minimum count or greater
+**autoscaled** | boolean | Enable or disable autoscaling for node pool.
+**min_count** | integer | Minimum number of nodes to maintain in the pool, 0 or greater.
+**max_count** | integer | Maximum number of nodes to maintain in the pool, must be equal to or greater than the `min_count` value.
 
-### Disable Autoscaling
-
-To disable autoscaling for nodepool, simply set `autoscaled` to `false`.
+## Example: Disable Autoscaling
 
 ```shell
-curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
-     --header "Content-Type: application/json" \
-     --header "Accept: application/json" \
-     --request POST \
-     --data @scale_node_pool.json \
-     https://api.stackpoint.io/orgs/1/clusters/12/nodepools
+POST "https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/nodepools/{Node Pool ID}"
 ```
 
-> `scale_node_pool.json` should contain the following data:
+> Example request:
+
+```shell
+curl -X POST \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d @disable-node-pool-autoscaling.json \
+https://api.stackpoint.io/orgs/1/clusters/2/nodepools/4
+```
+> Contents of disable-node-pool-autoscaling.json:
 
 ```json
 {
-    "autoscaled": false
+    "autoscaled": false,
 }
 ```
