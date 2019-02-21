@@ -2,177 +2,227 @@
 
 Each cluster in the StackPointCloud system can have 3 or more nodes.
 
-## Get All Nodes of a Cluster
+## GET All Nodes
 
 ```shell
-curl -x GET "https://api.stackpoint.io/orgs/4/clusters/12/nodes"
-  -H "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5"
+GET https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/nodes
 ```
 
-> The above command returns JSON structured like this:
+> Example query:
+
+```shell
+curl -X GET \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+"https://api.stackpoint.io/orgs/3/clusters/2/nodes"
+```
+
+> Example response:
 
 ```json
 [
-    {
-        "pk": 81,
-        "cluster": 12,
-        "pool": null,
-        "pool_name": "",
-        "instance_id": "spca44o3iw-master-1",
-        "role": "master",
-        "group_name": "",
-        "private_ip": "10.136.53.103",
-        "public_ip": "67.205.148.185",
-        "platform": "coreos",
-        "image": "coreos-stable",
-        "channel": "stable",
-        "location": "nyc1",
-        "provider_subnet_id": "",
-        "provider_subnet_cidr": "",
-        "size": "2gb",
-        "state": "running",
-        "is_failed": false,
-        "created": "2017-12-06T02:22:21.768702Z",
-        "updated": "2017-12-07T02:20:57.216553Z"
-    },
-    {
-        "pk": 82,
-        "cluster": 12,
-        "pool": 45,
-        "pool_name": "Default Worker Pool",
-        "instance_id": "spca44o3iw-worker-1",
-        "role": "worker",
-        "group_name": "autoscaling-spca44o3iw-pool-1",
-        "private_ip": "10.136.28.7",
-        "public_ip": "198.211.114.110",
-        "platform": "coreos",
-        "image": "coreos-stable",
-        "channel": "stable",
-        "location": "nyc1",
-        "provider_subnet_id": "",
-        "provider_subnet_cidr": "",
-        "size": "2gb",
-        "state": "running",
-        "is_failed": false,
-        "created": "2017-12-06T02:22:21.769636Z",
-        "updated": "2017-12-07T02:20:57.224818Z"
-    },
-    {
-        "pk": 83,
-        "cluster": 12,
-        "pool": 45,
-        "pool_name": "Default Worker Pool",
-        "instance_id": "spca44o3iw-worker-2",
-        "role": "worker",
-        "group_name": "autoscaling-spca44o3iw-pool-1",
-        "private_ip": "10.136.30.245",
-        "public_ip": "162.243.168.98",
-        "platform": "coreos",
-        "image": "coreos-stable",
-        "channel": "stable",
-        "location": "nyc1",
-        "provider_subnet_id": "",
-        "provider_subnet_cidr": "",
-        "size": "2gb",
-        "state": "running",
-        "is_failed": false,
-        "created": "2017-12-06T02:22:21.770540Z",
-        "updated": "2017-12-07T02:20:57.226463Z"
-    }
+  {
+    "pk": 6,
+    "cluster": 2,
+    "pool": 2,
+    "pool_name": "Default Worker Pool",
+    "instance_id": "spc8brwf3x-worker-2",
+    "provider_node_id": "",
+    "role": "worker",
+    "group_name": "autoscaling-spc8brwf3x-pool-1",
+    "private_ip": "",
+    "public_ip": "",
+    "platform": "coreos",
+    "image": "ami-0b0f4f5f0c8c1a797",
+    "channel": "stable",
+    "etcd_state": "none",
+    "root_disk_size": 50,
+    "gpu_instance_size": "",
+    "gpu_core_count": null,
+    "location": "us-west-2:us-west-2a",
+    "zone": "us-west-2a",
+    "provider_subnet_id": "subnet-d19044b6",
+    "provider_subnet_cidr": "172.22.4.0\/24",
+    "size": "t2.large",
+    "state": "draft",
+    "is_failed": false,
+    "created": "2019-02-15T16:28:01.495851Z",
+    "updated": "2019-02-15T16:28:01.496121Z"
+  }
 ]
 ```
+Get details for all of the transitioning or running nodes for the specified cluster.
 
-This endpoint retrieves all transitioning or running nodes under a given cluster.
+**Path Parameters**
 
-### HTTP Request
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Cluster ID** | Yes | The Cluster ID.
 
-`GET https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<CLUSTER_ID>/nodes`
+### Return Values
 
-### URL Parameters
+**Name** | **Description**
+---------|-----------------
+**pk** | Node ID.
+**cluster** | Cluster ID.
+**pool** | Node pool ID
+**pool_name** | Node pool name.
+**instance_id** | Instance ID.
+**provider_node_id** | Provider node ID.
+**role** | The node's role. Allowed values are `master` and `worker`.
+**group_name** | Group name.
+**private_ip** | The node's private IP address.
+**public_ip** | The node's public IP address.
+**platform** | The node's operating system.
+**image** | The image used.
+**channel** | The cluster's OS distribution version.
+**etcd_state** | The state of etcd (if applicable).
+**root_disk_size** | Root disk size.
+**gpu_instance_size** | GPU instance size.
+**gpu_core_count** | GPU core count.
+**location** | Location.
+**zone** | The AWS provider zone. Valid only for master nodes on AWS.
+**provider_subnet_id** | ID of the subnet where the node has been added. Valid only for master nodes on AWS.
+**provider_subnet_cidr** | The subnet CIDR. Valid only for master nodes on AWS.
+**size** | Node size.
+**state** | The node's state.
+**is_failed** | Whether or not the node has failed.
 
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
-CLUSTER_ID | ID of the cluster
-
-## Get a Specific Node
+## GET a Specific Node
 
 ```shell
-curl "https://api.stackpoint.io/orgs/4/clusters/12/nodes/81"
-  -H "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5"
+GET https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/nodes/{Node ID}
 ```
 
-> The above command returns JSON structured like this:
+> Example query:
+
+```shell
+curl -X GET \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+"https://api.stackpoint.io/orgs/3/clusters/2/nodes/6"
+```
+
+> Example response:
 
 ```json
-{
-    "pk": 8927,
-    "cluster": 2742,
-    "pool": null,
-    "pool_name": "",
-    "instance_id": "spca44o3iw-master-1",
-    "role": "master",
-    "group_name": "",
-    "private_ip": "10.136.53.103",
-    "public_ip": "67.205.148.185",
+[
+  {
+    "pk": 6,
+    "cluster": 2,
+    "pool": 2,
+    "pool_name": "Default Worker Pool",
+    "instance_id": "spc8brwf3x-worker-2",
+    "provider_node_id": "",
+    "role": "worker",
+    "group_name": "autoscaling-spc8brwf3x-pool-1",
+    "private_ip": "",
+    "public_ip": "",
     "platform": "coreos",
-    "image": "coreos-stable",
+    "image": "ami-0b0f4f5f0c8c1a797",
     "channel": "stable",
-    "location": "nyc1",
-    "provider_subnet_id": "",
-    "provider_subnet_cidr": "",
-    "size": "2gb",
-    "state": "running",
+    "etcd_state": "none",
+    "root_disk_size": 50,
+    "gpu_instance_size": "",
+    "gpu_core_count": null,
+    "location": "us-west-2:us-west-2a",
+    "zone": "us-west-2a",
+    "provider_subnet_id": "subnet-d19044b6",
+    "provider_subnet_cidr": "172.22.4.0\/24",
+    "size": "t2.large",
+    "state": "draft",
     "is_failed": false,
-    "created": "2017-12-06T02:22:21.768702Z",
-    "updated": "2017-12-07T02:20:57.216553Z"
-}
+    "created": "2019-02-15T16:28:01.495851Z",
+    "updated": "2019-02-15T16:28:01.496121Z"
+  }
+]
 ```
+Get details for all of the transitioning or running nodes for the specified cluster.
 
-This endpoint retrieves all transitioning or running nodes under a given cluster.
+**Path Parameters**
 
-### HTTP Request
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Cluster ID** | Yes | The Cluster ID.
+**Node ID** | Yes | The Node ID.
 
-`GET https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<CLUSTER_ID>/nodes/<ID>`
+### Return Values
 
-### URL Parameters
+**Name** | **Description**
+---------|-----------------
+**pk** | Node ID.
+**cluster** | Cluster ID.
+**pool** | Node pool ID
+**pool_name** | Node pool name.
+**instance_id** | Instance ID.
+**provider_node_id** | Provider node ID.
+**role** | The node's role. Allowed values are `master` and `worker`.
+**group_name** | Group name.
+**private_ip** | The node's private IP address.
+**public_ip** | The node's public IP address.
+**platform** | The node's operating system.
+**image** | The image used.
+**channel** | The cluster's OS distribution version.
+**etcd_state** | The state of etcd (if applicable).
+**root_disk_size** | Root disk size.
+**gpu_instance_size** | GPU instance size.
+**gpu_core_count** | GPU core count.
+**location** | Location.
+**zone** | The AWS provider zone. Valid only for master nodes on AWS.
+**provider_subnet_id** | ID of the subnet where the node has been added. Valid only for master nodes on AWS.
+**provider_subnet_cidr** | The subnet CIDR. Valid only for master nodes on AWS.
+**size** | Node size.
+**state** | The node's state.
+**is_failed** | Whether or not the node has failed.
 
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
-CLUSTER_ID | ID of the cluster
-ID | ID of the node
-
-## Add Nodes to a Cluster
-
-Adding master and worker nodes require separate requests.
-
-### Request Data Attributes
-
-Parameter | Type | Description
---------- | ---- | -----------
-role | string | Type of node to add. Options: `master`, `worker`
-size | string | Instance size for the nodes. Consult provider documentation for available instance sizes.
-node_count | integer | Number of nodes to add
-node_pool | integer | ID of the node pool to add the node to. Valid only when adding workers. If no value is specified, default node pool will be used
-zone | string | The zone where the node should be added. Valid only for master nodes on AWS
-provider_subnet_id | string | ID of Subnet where node should be added. Valid only for master nodes on AWS
-provider_subnet_cidr | string | Subnet CIDR. Valid only for master nodes on AWS
-
-<aside class="warning">Only 1 master node should be added at a time.</aside>
-
-## Add a Master Node
+## POST Add Nodes to a Cluster
 
 ```shell
-curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
-     --header "Content-Type: application/json" \
-     --header "Accept: application/json" \
-     --request POST \
-     --data @add_master_node.json \
-     https://api.stackpoint.io/orgs/1/clusters/12/add_node
+POST "https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/add_node"
 ```
 
-> `add_master_node.json` should contain the following data:
+Add nodes to the specified cluster.
+
+<aside class="notice">Adding master and worker nodes requires separate requests.</aside>
+
+**Path Parameters**
+
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Cluster ID** | Yes | The Cluster ID.
+
+### Node Attributes
+
+**Name** | **Type** | **Description**
+---------|----------|----------------
+**role** | string | Type of node to add. Allowed values are `master` or `worker`.
+**size** | string | Instance size for the nodes. Consult provider documentation for available instance sizes.
+**node_count** | integer | Number of nodes to add.
+**node_pool** | integer | ID of the node pool to add the node to. Valid only when adding worker nodes. If no value is specified, the default node pool will be used.
+**zone** | the zone where the node should be added. Valid only for master nodes on AWS.
+**provider_subnet_id** | ID of the subnet where the node has been added. Valid only for master nodes on AWS.
+**provider_subnet_cidr** | The subnet CIDR. Valid only for master nodes on AWS.
+
+<aside class="warning">Only one master node should be added at a time.</aside>
+
+## Example: Add a Master Node
+
+```shell
+POST "https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/add_node"
+```
+> Example request:
+
+```shell
+curl -X POST \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d @add-master-node.json \
+https://api.stackpoint.io/orgs/1/clusters/2/add_node
+```
+
+> Contents of add-master-node.json:
 
 ```json
 {
@@ -182,52 +232,21 @@ curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
 }
 ```
 
-Add a master node to a DigitalOcean cluster.
-
-`POST https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<CLUSTER_ID>/add_node`
-
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
-CLUSTER_ID | ID of the cluster
-
-## Add Worker Nodes
+## GET a Node's Delete Eligibility
 
 ```shell
-curl --header "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5" \
-     --header "Content-Type: application/json" \
-     --header "Accept: application/json" \
-     --request POST \
-     --data @add_worker_nodes.json \
-     https://api.stackpoint.io/orgs/1/clusters/12/add_node
+GET https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/nodes/{Node ID}/can_delete
 ```
 
-> `add_worker_nodes.json` should contain the following data:
-
-```json
-{
-    "node_count": 3,
-    "size": "2gb"
-}
-```
-
-Add a worker node to a DigitalOcean cluster.
-
-`POST https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<CLUSTER_ID>/add_node`
-
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
-CLUSTER_ID | ID of the cluster
-
-## Check Node Delete Eligiblity
+> Example request:
 
 ```shell
-curl -X GET "https://api.stackpoint.io/orgs/4/clusters/12/nodes/81/can_delete"
-  -H "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5"
+curl -X GET \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+"https://api.stackpoint.io/orgs/3/clusters/2/nodes/4/can_delete"
 ```
 
-> If the node can be deleted, a JSON response is returned:
+> Example response, if the node can be deleted:
 
 ```json
 {
@@ -235,44 +254,47 @@ curl -X GET "https://api.stackpoint.io/orgs/4/clusters/12/nodes/81/can_delete"
 }
 ```
 
-> If the node can not be deleted, a JSON response is returned with status code `400`:
+> If the node cannot be deleted, a JSON response is returned with status code `400`:
 
 ```json
 {
     "detail": "Initial master node is essential to the cluster and can't be removed."
 }
 ```
+Get information on whether or not a specific node can be deleted.
 
-This endpoint checks whether a specific node can be deleted.
+**Path Parameters**
 
-`GET https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<CLUSTER_ID>/nodes/can_delete`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
-CLUSTER_ID | ID of the cluster
-ID | ID of the node
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Cluster ID** | Yes | The Cluster ID.
+**Node ID** | Yes | The Node ID.
 
 
 ## Delete a Node
 
 ```shell
-curl -X DELETE "https://api.stackpoint.io/orgs/4/clusters/12/nodes/81"
-  -H "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5"
+DELETE "https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/nodes/{Node ID}"
+```
+> Example request:
+
+```shell
+curl -X DELETE \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+"https://api.stackpoint.io/orgs/3/clusters/2/nodes/4"
 ```
 
-> The above command returns an empty response with status code `204`
+> If the node is successfully deleted, this command returns an empty response with status code `204`
 
-This endpoint deletes a specific node.
+Delete a specific node.
 
-`DELETE https://api.stackpoint.io/orgs/<ORG_ID>/clusters/<CLUSTER_ID>/nodes/<ID>`
+<aside class="warning">Before attempting to delete a node, check the `can_delete` endpoint (described above) to see if it can be deleted.</aside>
 
-### URL Parameters
+**Path Parameters**
 
-Parameter | Description
---------- | -----------
-ORG_ID | ID of the organization
-CLUSTER_ID | ID of the cluster
-ID | ID of the node
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Cluster ID** | Yes | The Cluster ID.
+**Node ID** | Yes | The Node ID.
