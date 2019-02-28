@@ -4,7 +4,7 @@ Node pools are used to manage worker nodes with common properties.
 
 Each cluster gets a default node pool when it is created. Master nodes are stand-alone and do not belong to pools.
 
-## GET All of a Cluster's Node Pools
+## GET All Node Pools
 
 ```shell
 GET "https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/nodepools"
@@ -55,9 +55,9 @@ https://api.stackpoint.io/orgs/3/clusters/2/nodepools
   }
 ]
 ```
-Get all the transitioning or running nodes for the specified cluster.
+Get all the transitioning or running node pools for the specified cluster.
 
-**Path Parameter**
+**Path Parameters**
 
 **Name** | **Required** | **Description**
 -----|----------|-------------
@@ -115,7 +115,7 @@ https://api.stackpoint.io/orgs/3/clusters/2/nodepools/2
 > Example response:
 
 ```json
-[
+
   {
     "pk": 2,
     "cluster": 2,
@@ -147,12 +147,12 @@ https://api.stackpoint.io/orgs/3/clusters/2/nodepools/2
     "created": "2019-02-15T16:28:01.307143Z",
     "updated": "2019-02-15T16:28:02.022251Z"
   }
-]
+
 ```
 
 Get information for a specific node pool.
 
-**Path Parameter**
+**Path Parameters**
 
 **Name** | **Required** | **Description**
 -----|----------|-------------
@@ -211,8 +211,8 @@ Create a node pool for the specified cluster.
 
 ### Node Pool Attributes
 
-**Name** | **Description**
----------|-----------------
+**Name** | **Type** | **Description**
+---------|----------|----------------
 **name** | string | Node pool name.
 **instance_size** | string | Instance size for the nodes. Consult provider documentation for available instance sizes.
 **platform** | string | Linux distribution to use. The allowed values are:
