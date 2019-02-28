@@ -5,7 +5,7 @@ The Clusters resource lets you create, manage, and delete Kubernetes clusters on
 Clusters are scoped under Organizations as well as Workspaces.
 
 
-## Get All Clusters
+## GET All Clusters
 
 ```shell
 GET "https://api.stackpoint.io/orgs/{Org ID}/clusters"
@@ -73,8 +73,8 @@ Get all the Clusters belonging to the specified Organization.
 
 **Name** | **Description**
 ---------|-----------------
-**pk** | Keyset ID.
-**instance_id** | The cluster ID.
+**pk** | The Cluster ID.
+**instance_id** | The cluster's instance name.
 **name** | Cluster name.
 **org** | Organization ID.
 **provider** | The provider on which the cluster is provisioned.
@@ -110,7 +110,7 @@ curl -X GET \
 > Example response:
 
 ```json
-[
+
     {
         "pk": 45,
         "instance_id": "spcbsk7u4u",
@@ -146,7 +146,6 @@ curl -X GET \
         "version_migrations": [],
         "k8s_rbac_enabled": true
     }
-]
 ```
 
 Get information for a specific cluster.
@@ -162,8 +161,8 @@ Get information for a specific cluster.
 
 **Name** | **Description**
 ---------|-----------------
-**pk** | Keyset ID.
-**instance_id** | The cluster ID.
+**pk** | The Cluster ID.
+**instance_id** | The cluster's instance name.
 **name** | Cluster name.
 **org** | Organization ID.
 **provider** | The provider on which the cluster is provisioned.
@@ -181,7 +180,7 @@ Get information for a specific cluster.
 **federation_role** | Whether or not the cluster has been Federated.
 **k8s_rbac_enabled** | Whether or not the cluster has RBAC enabled.
 
-## Create a Cluster
+## POST Create a Cluster
 
 > To create a cluster in the default workspace:
 
@@ -408,7 +407,7 @@ https://api.stackpoint.io/orgs/3/clusters
 
 Create an AWS cluster with Helm installed as a solution.
 
-## Delete a Cluster
+## DELETE a Cluster
 
 ```shell
 curl -X DELETE "https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}"
