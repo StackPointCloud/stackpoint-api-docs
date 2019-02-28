@@ -4,7 +4,7 @@ Keysets are credentials used by the system to provision clusters, add nodes, or 
 
 <aside class="warning">Only an organization Owner or Admin can create, update, or delete Keysets.</aside>
 
-<aside class="notice">For VCS keysets, only GET and DELETE are allowed through the API. To create or modify VCS credentials, you will need to use the UI.</aside>
+<aside class="notice">For VCS keysets, only GET and DELETE are allowed through the API. To create or modify VCS credentials, you will need to use the UI.</aside> 
 
 ## GET All Keysets
 
