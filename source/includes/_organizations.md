@@ -125,7 +125,7 @@ curl -X POST \
 
 ```shell
 {
-  "name": "My New Organization",
+  "name": "My New Organization"
 }
 ```
 
@@ -186,13 +186,13 @@ curl -X PATCH \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
 -d @postorg.json \
-"https://api.stackpoint.io/orgs/2"
+"https://api.stackpoint.io/orgs/3"
 ```
 > Contents of `postorg.json`:
 
 ```json
 {
-  "name": "New Organization Name",
+  "name": "New Organization Name"
 }
 ```
 
