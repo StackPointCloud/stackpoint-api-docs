@@ -8,7 +8,11 @@ Organizations are the highest-level resource. The Organizations resource contain
 
 The first time you log in to Stackpoint.io, we automatically create an Organization for you. You can customize the name and logo of this Organization on the [Organization Setup](https://stackpoint.io/organization/setup) page.
 
-## GET /orgs
+## GET All Organizations
+
+```shell
+GET https://api.stackpoint.io/orgs/
+```
 
 > Example request:
 
@@ -54,7 +58,58 @@ Get the list of Organizations of which the user is a member.
 **created** | Timestamp of the Organization's create date.
 **updated** | Timestamp of the last update to the Organization
 
-## POST /orgs
+## GET a Specific Organization
+
+```shell
+GET https://api.stackpoint.io/orgs/{Org ID}
+```
+
+> Example request:
+
+```shell
+curl -X GET \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+"https://api.stackpoint.io/orgs/2"
+```
+
+> Example response:
+
+```json
+{
+  "pk": 2,
+  "name": "My Organization",
+  "slug": "my-organization",
+  "logo": null,
+  "created": "2016-08-05T14:35:53.161852Z",
+  "updated": "2019-01-31T18:31:21.583756Z"
+}
+```
+
+Get information for a specific Organization.
+
+**Path Parameter**
+
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+
+
+### Return Values
+
+**Name** | **Description**
+---------|-----------------
+**pk** | Organization ID.
+**name** | Organization name.
+**slug** | A human-readable unique identifier, used for storing Organization data.
+**logo** | Organization logo. This value is `null` if a custom logo has not been set.
+**created** | Timestamp of the Organization's create date.
+**updated** | Timestamp of the last update to the Organization
+
+## POST a New Organization
+
+```shell
+POST https://api.stackpoint.io/orgs/
+```
 
 > Example Request:
 
@@ -70,7 +125,7 @@ curl -X POST \
 
 ```shell
 {
-  "name": "My New Organization",
+  "name": "My New Organization"
 }
 ```
 
@@ -116,50 +171,13 @@ Create a new Organization in the user's account.
 **created** | Timestamp of the Organization's create date.
 **updated** | Timestamp of the last update to the Organization
 
-## GET /orgs/{Org ID}
 
-> Example request:
+
+## PATCH Update an Organization
 
 ```shell
-curl -X GET \
--H "Authorization: Bearer abcdef123456789abcdef123456789" \
-"https://api.stackpoint.io/orgs/2"
+PATCH https://api.stackpoint.io/orgs/{Org ID}
 ```
-
-> Example response:
-
-```json
-{
-  "pk": 2,
-  "name": "My Organization",
-  "slug": "my-organization",
-  "logo": null,
-  "created": "2016-08-05T14:35:53.161852Z",
-  "updated": "2019-01-31T18:31:21.583756Z"
-}
-```
-
-Get information for a specific Organization.
-
-**Path Parameter**
-
-**Name** | **Required** | **Description**
------|----------|-------------
-**Org ID** | Yes | The Organization ID.
-
-
-### Return Values
-
-**Name** | **Description**
----------|-----------------
-**pk** | Organization ID.
-**name** | Organization name.
-**slug** | A human-readable unique identifier, used for storing Organization data.
-**logo** | Organization logo. This value is `null` if a custom logo has not been set.
-**created** | Timestamp of the Organization's create date.
-**updated** | Timestamp of the last update to the Organization
-
-## PATCH /orgs/{Org ID}
 
 > Example Request: Update the Organization name from the contents of a JSON file:
 
@@ -168,13 +186,13 @@ curl -X PATCH \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
 -d @postorg.json \
-"https://api.stackpoint.io/orgs/2"
+"https://api.stackpoint.io/orgs/3"
 ```
 > Contents of `postorg.json`:
 
 ```json
 {
-  "name": "New Organization Name",
+  "name": "New Organization Name"
 }
 ```
 

@@ -82,7 +82,7 @@ Get all of the Keysets belonging to the specified Organization. Each Keyset cont
 **fingerprint** | For SSH credentials: The RSA fingerprint.
 **created** | Timestamp of the Keyset's create date.
 
-## GET A Specific Keyset
+## GET a Specific Keyset
 
 ```shell
 GET https://api.stackpoint.io/orgs/{Org ID}/keysets/{Keyset ID}
