@@ -4,7 +4,7 @@ Keysets are credentials used by the system to provision clusters, add nodes, or 
 
 <aside class="warning">Only an organization Owner or Admin can create, update, or delete Keysets.</aside>
 
-<aside class="notice">For VCS keysets, only GET and DELETE are allowed through the API. To create or modify VCS credentials, you will need to use the UI.</aside>
+<aside class="notice">For VCS keysets, only GET and DELETE are allowed through the API. To create or modify VCS credentials, you will need to use the UI.</aside> 
 
 ## GET All Keysets
 
@@ -82,7 +82,7 @@ Get all of the Keysets belonging to the specified Organization. Each Keyset cont
 **fingerprint** | For SSH credentials: The RSA fingerprint.
 **created** | Timestamp of the Keyset's create date.
 
-## GET A Specific Keyset
+## GET a Specific Keyset
 
 ```shell
 GET https://api.stackpoint.io/orgs/{Org ID}/keysets/{Keyset ID}
