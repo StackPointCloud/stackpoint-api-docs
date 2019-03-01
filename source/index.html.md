@@ -9,12 +9,14 @@ toc_footers:
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - basics
-  - organizations
-  - keysets
-  - clusters
-  - nodepools
-  - nodes
+  - _basics.md
+  - _organizations.md
+  - _workspaces.md
+  - _keysets.md
+  - _clusters.md
+  - _nodes.md
+  - _nodepools.md
+
 
 search: true
 ---
