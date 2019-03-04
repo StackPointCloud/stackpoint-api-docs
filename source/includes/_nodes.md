@@ -14,7 +14,7 @@ curl -X GET \
 -H "Authorization: Bearer abcdef123456789abcdef123456789" \
 "https://api.stackpoint.io/orgs/3/clusters/2/nodes"
 ```
-
+ 
 > Example response:
 
 ```json
