@@ -7,7 +7,7 @@ Each cluster in the StackPointCloud system can have 3 or more nodes.
 ```shell
 curl -x GET "https://api.stackpoint.io/orgs/4/clusters/12/nodes"
   -H "Authorization: Bearer d0bf933f1a9f2c04f99e4bc713289fbb35abb3a5"
-```
+``` 
 
 > The above command returns JSON structured like this:
 
