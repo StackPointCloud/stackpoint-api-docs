@@ -2,6 +2,8 @@
 
 Get and update your user account information. The user account cannot be deleted through the API.
 
+Note: Calling this API with a valid auth token creates a new user.
+
 ## GET All User Info
 
 ```shell
@@ -162,7 +164,7 @@ Retrieve profile, organization, keyset, and subscription details for the user wh
 
 **Name** | **Description**
 ---------|-----------------
-**pk** | Cluster ID.
+**pk** | User ID.
 **username** | The user's username. Make a note of this value if you need to update the user with a PATCH request.
 **email** | The user's email address.
 **first_name** | The user's first name.
@@ -384,7 +386,7 @@ Update your user profile. Use this resource to update your email address, first 
 
 **Name** | **Description**
 ---------|-----------------
-**pk** | Cluster ID.
+**pk** | User ID.
 **username** | The user's username. Make a note of this value if you need to update the user with a PATCH request.
 **email** | The user's email address.
 **first_name** | The user's first name.
