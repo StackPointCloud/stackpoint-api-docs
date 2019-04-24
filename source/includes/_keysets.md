@@ -288,7 +288,7 @@ NOTE: When creating a Keyset, the required number of Keys must be passed.
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
 |`azure-storage` | 2 | `other` | string | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
-| | | `access_key` | Access Key
+| | | | `access_key` | Access Key
 
 **User SSH**
 
@@ -440,7 +440,7 @@ NOTE: When creating a Keyset, the required number of Keys must be passed.
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
 |`azure-storage` | 2 | `other` | string | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
-| | | `access_key` | Access Key
+| | | | `access_key` | Access Key
 
 **User SSH**
 
