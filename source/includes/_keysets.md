@@ -250,45 +250,45 @@ NOTE: When creating a Keyset, the required number of Keys must be passed.
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-`aks` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
-. |. | `tenant` | string | Tenant ID
-. |. | `pub` | string | Client ID
-. |. | `pvt` | string | Client Password   
-`aws` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
-. |. | `pvt` | string | Secret Access Key
-`azure` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
-. |. | `tenant` | string | Tenant ID
-. |. | `pub` | string | Client ID
-. |. | `pvt` | string | Client Secret
-`do` | 1 | `token` | string | API Token
-`eks` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
-. |. | `pvt` | string | Secret Access Key
-`gce` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gce.html">Service Account JSON</a>
-`gke` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gke.html">Service Account JSON</a>
-`oneandone` | 1 | `token` | string | API Token
-`packet` | 1 | `token` | string | API Key
-`profitbricks` | 2 | `username` | string (email) | ProfitBricks username
-. |. | `password` | string | Password
+|`aks` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
+| | | `tenant` | string | Tenant ID
+| | | `pub` | string | Client ID
+| | | `pvt` | string | Client Password   
+|`aws` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
+| | | `pvt` | string | Secret Access Key
+|`azure` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
+| | | `tenant` | string | Tenant ID
+| | | `pub` | string | Client ID
+| | | `pvt` | string | Client Secret
+|`do` | 1 | `token` | string | API Token
+|`eks` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
+| | | `pvt` | string | Secret Access Key
+|`gce` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gce.html">Service Account JSON</a>
+|`gke` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gke.html">Service Account JSON</a>
+|`oneandone` | 1 | `token` | string | API Token
+|`packet` | 1 | `token` | string | API Key
+|`profitbricks` | 2 | `username` | string (email) | ProfitBricks username
+| | | `password` | string | Password
 
 
 **Solutions**
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-`cvsaws` | 2 | `pub` | string | API Key
-. |. | `pvt` | string | Secret Key
-`sysdig` | 1 | `token` | string | Sysdig Cloud Access Key
-`turbonomic` | 4 | `url` | string | Turbonomic Instance URL
-. |. | `username` | string | Username
-. |. | `password` | string | Password
-. |. | `scope` | string | Value must be `external`
+|`cvsaws` | 2 | `pub` | string | API Key
+| | | `pvt` | string | Secret Key
+|`sysdig` | 1 | `token` | string | Sysdig Cloud Access Key
+|`turbonomic` | 4 | `url` | string | Turbonomic Instance URL
+| | | `username` | string | Username
+| | | `password` | string | Password
+| | | `scope` | string | Value must be `external`
 
 **Storage**
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-`azure-storage` | 2 | `other` | string | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
-. |. | `access_key` | Access Key
+|`azure-storage` | 2 | `other` | string | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
+| | | `access_key` | Access Key
 
 **User SSH**
 
@@ -402,45 +402,45 @@ NOTE: When creating a Keyset, the required number of Keys must be passed.
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-`aks` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
-. |. | `tenant` | string | Tenant ID
-. |. | `pub` | string | Client ID
-. |. | `pvt` | string | Client Password   
-`aws` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
-. |. | `pvt` | string | Secret Access Key
-`azure` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
-. |. | `tenant` | string | Tenant ID
-. |. | `pub` | string | Client ID
-. |. | `pvt` | string | Client Secret
-`do` | 1 | `token` | string | API Token
-`eks` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
-. |. | `pvt` | string | Secret Access Key
-`gce` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gce.html">Service Account JSON</a>
-`gke` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gke.html">Service Account JSON</a>
-`oneandone` | 1 | `token` | string | API Token
-`packet` | 1 | `token` | string | API Key
-`profitbricks` | 2 | `username` | string (email) | ProfitBricks username
-. |. | `password` | string | Password
+|`aks` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
+| | | `tenant` | string | Tenant ID
+| | | `pub` | string | Client ID
+| | | `pvt` | string | Client Password   
+|`aws` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
+| | | `pvt` | string | Secret Access Key
+|`azure` | 4 | `subscription` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-azure.html">Subscription ID</a>
+| | | `tenant` | string | Tenant ID
+| | | `pub` | string | Client ID
+| | | `pvt` | string | Client Secret
+|`do` | 1 | `token` | string | API Token
+|`eks` | 2 | `pub` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-aws.html" target="blank">Access Key ID</a>
+| | | `pvt` | string | Secret Access Key
+|`gce` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gce.html">Service Account JSON</a>
+|`gke` | 1 | `other` | string | <a href="https://docs.netapp.com/us-en/kubernetes-service/create-auth-credentials-on-gke.html">Service Account JSON</a>
+|`oneandone` | 1 | `token` | string | API Token
+|`packet` | 1 | `token` | string | API Key
+|`profitbricks` | 2 | `username` | string (email) | ProfitBricks username
+| | | `password` | string | Password
 
 
 **Solutions**
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-`cvsaws` | 2 | `pub` | string | API Key
-. |. | `pvt` | string | Secret Key
-`sysdig` | 1 | `token` | string | Sysdig Cloud Access Key
-`turbonomic` | 4 | `url` | string | Turbonomic Instance URL
-. |. | `username` | string | Username
-. |. | `password` | string | Password
-. |. | `scope` | string | Value must be `external`
+|`cvsaws` | 2 | `pub` | string | API Key
+| | | `pvt` | string | Secret Key
+|`sysdig` | 1 | `token` | string | Sysdig Cloud Access Key
+|`turbonomic` | 4 | `url` | string | Turbonomic Instance URL
+| | | `username` | string | Username
+| | | `password` | string | Password
+| | | `scope` | string | Value must be `external`
 
 **Storage**
 
 **Entity** | **Number of Keys** | **Key Type** | **Data Type** | **Description**
 ---------- | ------------------ | ------------ | ------------- | ---------------
-`azure-storage` | 2 | `other` | string | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
-. |. | `access_key` | Access Key
+|`azure-storage` | 2 | `other` | string | <a href="https://docs.microsoft.com/en-us/azure/storage/storage-create-storage-account#create-a-storage-account">Account Name</a>
+| | | `access_key` | Access Key
 
 **User SSH**
 
