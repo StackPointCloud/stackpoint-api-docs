@@ -180,6 +180,30 @@ Get information for a specific cluster.
 **federation_role** | Whether or not the cluster has been Federated.
 **k8s_rbac_enabled** | Whether or not the cluster has RBAC enabled.
 
+## GET a Cluster's Kubeconfig File
+
+```shell
+GET "https://api.stackpoint.io/orgs/{Org ID}/clusters/{Cluster ID}/kubeconfig"
+```
+
+> Example request. The following request will pipe the results of the query into the local file `kubeconfig` which you can then use to work with your cluster.
+
+```shell
+curl -X GET \
+-H "Authorization: Bearer abcdef123456789abcdef123456789" \
+"https://api.stackpoint.io/orgs/2/clusters/14/kubeconfig" \
+> kubeconfig
+```
+
+Download the kubeconfig file for the specified cluster.
+
+**Path Parameters**
+
+**Name** | **Required** | **Description**
+-----|----------|-------------
+**Org ID** | Yes | The Organization ID.
+**Cluster ID** | Yes | The Cluster ID.
+
 ## POST Create a Cluster
 
 > To create a cluster in the default workspace:
