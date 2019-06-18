@@ -2,6 +2,10 @@
 
 Federation simplifies the process of managing multiple clusters, by allowing you to sync resources across clusters, auto-configure DNS servers for cross-cluster discovery, and more.
 
+**DEPRECATION WARNING**
+
+Use of Federation v1 is strongly discouraged. Federation V1 never achieved GA status and is no longer under active development. These features are provided for experimental purposes only.
+
 ## GET All Federations
 
 ```shell
