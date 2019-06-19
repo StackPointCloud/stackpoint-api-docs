@@ -21,7 +21,8 @@ includes:
   - _nodepools.md
   - _federations.md
   - _trusted-charts.md
-  - _meta.md
+  - _subscription.md
+  - _invoice.md
 
 
 search: true
