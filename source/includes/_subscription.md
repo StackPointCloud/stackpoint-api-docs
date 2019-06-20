@@ -82,7 +82,7 @@ curl -X GET \
 }
 ```
 
-Retrieve details for the subscription of the specified user.
+Retrieve details for the subscription of the user, as specified by the API key passed in the authentication header.
 
 ### Return Values
 
